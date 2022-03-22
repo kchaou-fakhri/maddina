@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "793311008107",
+    "project_id": "madina-27539",
+    "storage_bucket": "madina-27539.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:793311008107:android:edb4a66e8cb64cc260282e",
+        "android_client_info": {
+          "package_name": "fakhri.kchaou.maddina"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "793311008107-teumvde449skr1gf71v9qfk09456qe7l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fakhri.kchaou.maddina",
+            "certificate_hash": "d832680c9222ef0ea0a8cd34889c20d8b414d3bd"
+          }
+        },
+        {
+          "client_id": "793311008107-4vnc8e6pdq528cqnmc1uf9re8gf97nra.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiqRyQathvWiN7PQ3BtCVL1hmybrkVJWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "793311008107-4vnc8e6pdq528cqnmc1uf9re8gf97nra.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

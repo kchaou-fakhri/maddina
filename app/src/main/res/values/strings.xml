@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">login</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_label">المدينة</string>
+    <string name="create_account">انشاء حساب</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="create_post">Add</string>
+    <string name="music">Music</string>
+    <string name="home">Home</string>
+    <string name="news">News</string>
+
+    <string-array name="sex">
+        <item name="men">رجل</item>
+        <item name="women">مرأة</item>
+    </string-array>
+
+</resources>

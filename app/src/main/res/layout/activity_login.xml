@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@color/primary_color"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_label"
+        android:textColor="@color/second_color"
+        android:textSize="70sp"
+        android:fontFamily="@font/aref_ruqa_regular"
+        android:layout_marginTop="80dp"
+        android:textAlignment="center"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:cardCornerRadius="13dp"
+        android:background="@color/white"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+
+        android:layout_marginBottom="25dp">
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="25dp"
+            android:orientation="vertical">
+
+            <TableLayout
+                android:layout_marginBottom="10dp"
+                android:stretchColumns="0,1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                >
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    tools:ignore="UselessParent">
+                    <Button
+                        android:id="@+id/go_to_signup"
+                        android:text="@string/create_account"
+                        android:textColor="@color/primary_color"
+                        android:textStyle="bold"
+                        android:layout_column="0"
+                        android:layout_marginTop="-4dp"
+                        android:layout_marginBottom="-4dp"
+                        android:background="@color/yellow_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        style="?android:attr/buttonBarButtonStyle" />
+
+                    <Button
+                        android:id="@+id/go_to_login"
+                        android:textStyle="bold"
+                        android:text="@string/login"
+                        android:layout_marginTop="-4dp"
+                        android:layout_marginBottom="-4dp"
+                        android:textColor="@color/yellow_color"
+                        android:background="@color/primary_color"
+                        android:layout_column="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        style="?android:attr/buttonBarButtonStyle" />
+                </TableRow>
+            </TableLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/auth_fragment"/>
+
+        </LinearLayout>
+
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</RelativeLayout>

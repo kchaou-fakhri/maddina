@@ -1,4 +1,4 @@
-package fakhri.kchaou.maddina
+package fakhri.kchaou.maddina.view.auth
 
 
 
@@ -10,9 +10,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-
-
+import fakhri.kchaou.maddina.R
 import fakhri.kchaou.maddina.databinding.FragmentSignBinding
+
+
 import fakhri.kchaou.maddina.viewmodel.UserVM
 
 class SignFragment : Fragment() {

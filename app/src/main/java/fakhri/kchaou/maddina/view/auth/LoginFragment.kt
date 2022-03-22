@@ -1,4 +1,4 @@
-package fakhri.kchaou.maddina
+package fakhri.kchaou.maddina.view.auth
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -8,12 +8,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.google.android.material.progressindicator.CircularProgressIndicator
+import fakhri.kchaou.maddina.R
 import fakhri.kchaou.maddina.databinding.FragmentLoginBinding
-import fakhri.kchaou.maddina.databinding.FragmentSignBinding
+import fakhri.kchaou.maddina.view.HomeActivity
 import fakhri.kchaou.maddina.viewmodel.UserVM
-import java.util.concurrent.TimeUnit
 
 
 class LoginFragment : Fragment() {

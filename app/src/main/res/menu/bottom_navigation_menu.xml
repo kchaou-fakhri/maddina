@@ -12,7 +12,7 @@
         android:title="@string/music"/>
 
     <item
-        android:id="@+id/page_4"
+        android:id="@+id/logout"
         android:enabled="true"
         android:icon="@drawable/ic_news"
         android:title="@string/news"/>

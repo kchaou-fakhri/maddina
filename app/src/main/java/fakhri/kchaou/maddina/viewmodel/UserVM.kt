@@ -1,9 +1,8 @@
 package fakhri.kchaou.maddina.viewmodel
 
 import androidx.lifecycle.ViewModel
-import fakhri.kchaou.maddina.SignFragment
-import fakhri.kchaou.maddina.entity.User
-import fakhri.kchaou.maddina.repository.UserRepository
+import fakhri.kchaou.maddina.model.entity.User
+import fakhri.kchaou.maddina.model.repository.UserRepository
 
 class UserVM<T>(val app: T) : ViewModel() {
 
@@ -13,7 +12,7 @@ class UserVM<T>(val app: T) : ViewModel() {
 
     fun addUser(name : String,email :String, password :String , sex: String) {
         val user = User(null,name,email, password, sex)
-         userRepository.addUser(user)
+         userRepository.add(user)
     }
 
     fun login(email :String, password :String ) {
@@ -23,6 +22,10 @@ class UserVM<T>(val app: T) : ViewModel() {
 
     fun ifLogin() : String?{
         return userRepository.ifLogin()
+    }
+
+    fun logout(){
+        userRepository.logout()
     }
 
 

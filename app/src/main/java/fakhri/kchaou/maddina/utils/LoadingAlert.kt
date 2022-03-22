@@ -1,4 +1,4 @@
-package fakhri.kchaou.maddina
+package fakhri.kchaou.maddina.utils
 
 import android.app.Activity
 import android.app.AlertDialog

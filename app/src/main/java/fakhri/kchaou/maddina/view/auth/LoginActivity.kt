@@ -1,14 +1,11 @@
-package fakhri.kchaou.maddina
+package fakhri.kchaou.maddina.view.auth
 import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import com.google.android.material.progressindicator.CircularProgressIndicator
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
-import fakhri.kchaou.maddina.entity.User
-import fakhri.kchaou.maddina.model.UserModel
+import fakhri.kchaou.maddina.R
+import fakhri.kchaou.maddina.view.HomeActivity
 import fakhri.kchaou.maddina.viewmodel.UserVM
 
 

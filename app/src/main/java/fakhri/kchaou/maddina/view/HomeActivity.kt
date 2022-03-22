@@ -1,19 +1,24 @@
-package fakhri.kchaou.maddina
+package fakhri.kchaou.maddina.view
 
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import android.view.*
-import android.widget.AdapterView
-import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import fakhri.kchaou.maddina.R
+import fakhri.kchaou.maddina.view.post.CreatePostFragment
+import fakhri.kchaou.maddina.view.profile.ProfileFragment
+import fakhri.kchaou.maddina.viewmodel.UserVM
 
 
 class HomeActivity : AppCompatActivity() {
 
     lateinit var createPostFragment: CreatePostFragment
     lateinit var profileFragment : ProfileFragment
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -23,6 +28,7 @@ class HomeActivity : AppCompatActivity() {
         bottomNavigationView.selectedItemId = R.id.home
         createPostFragment = CreatePostFragment()
         profileFragment    = ProfileFragment()
+
 
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.home_fragment, profileFragment)
@@ -47,6 +53,11 @@ class HomeActivity : AppCompatActivity() {
                         commit()
 
                     }
+                }
+                R.id.logout -> {
+                    val userVM = UserVM(this)
+                    userVM.logout()
+                   this.finish()
                 }
 
             }

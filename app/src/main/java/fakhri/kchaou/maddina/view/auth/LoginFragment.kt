@@ -45,6 +45,8 @@ class LoginFragment : Fragment() {
 
 
             if(validEmail(email) == null && validPassword(password) == null){
+                binding.labelEmail.helperText = validEmail(email)
+                binding.labelPassword.helperText = validPassword(password)
                 var dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.loading_alert, null)
                 val builder    = AlertDialog.Builder(requireContext())
                     .setView(dialogView)

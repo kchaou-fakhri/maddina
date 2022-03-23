@@ -36,10 +36,11 @@
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/arefruqaa"
-                android:text="رجوع"
+                android:text="@string/back"
                 android:textColor="@color/yellow_color"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 app:icon="@drawable/ic_forward"
+                app:iconTint="@color/yellow_color"
                 app:iconGravity="end"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/toolbar"
@@ -59,42 +60,42 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:layout_marginTop="32dp"
+        android:hint="@string/write_samthing"
         app:helperText=""
         app:helperTextTextColor="@color/error_color"
-        android:layout_marginTop="32dp"
-        android:hint="أكتب شيء…"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout2"
-        app:layout_constraintVertical_bias="0.181">
+        app:layout_constraintVertical_bias="0.0">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/post_text"
             android:layout_width="match_parent"
             android:layout_height="150dp" />
 
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:layout_margin="10dp"
         android:id="@+id/btn_create"
         android:layout_width="150dp"
         android:layout_height="40dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="8dp"
+        android:layout_margin="10dp"
 
+        android:layout_marginEnd="8dp"
         android:background="@drawable/shape_bkg"
         android:fontFamily="@font/arefruqaa"
-        android:text="حفظ"
+        android:text="@string/save"
         android:textColor="@color/primary_color"
-        android:textSize="18dp"
 
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/post_text_label"
-        app:layout_constraintVertical_bias="0.075" />
+        app:layout_constraintTop_toBottomOf="@+id/add_persone"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/cancel"
@@ -104,10 +105,10 @@
         android:background="@drawable/shape_bkg"
         android:backgroundTint="@color/yellow_color"
         android:fontFamily="@font/arefruqaa"
-        android:text="إلغاء"
+        android:text="@string/cancel"
         android:textColor="@color/primary_color"
 
-        android:textSize="18dp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/btn_create"
         app:layout_constraintEnd_toStartOf="@+id/btn_create"
         app:layout_constraintHorizontal_bias="1.0"
@@ -115,7 +116,69 @@
         app:layout_constraintTop_toTopOf="@+id/btn_create"
         app:layout_constraintVertical_bias="0.0" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/add_image_viedo"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="3dp"
+        android:layout_weight="1"
+        android:text="@string/image_video"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:icon="@drawable/ic_photo"
+        app:iconGravity="end"
+        app:iconTint="@color/green_color"
+        app:layout_constraintBottom_toTopOf="@+id/add_place"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.971"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/post_text_label"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="RtlHardcoded" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/add_place"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginBottom="408dp"
+        android:layout_weight="1"
+        android:text="مدينة"
+        android:textColor="@color/black"
+
+        android:textSize="15sp"
+        app:icon="@drawable/ic_places"
+        app:iconGravity="end"
+        app:iconTint="#FFD365"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.974"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="RtlHardcoded" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/add_persone"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_weight="1"
+        android:text="مدينة"
+        android:textColor="@color/black"
+
+        android:textSize="15sp"
+        app:icon="@drawable/ic_person"
+        app:iconGravity="end"
+        app:iconTint="#6B4F4F"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.974"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_place"
+        tools:ignore="RtlHardcoded" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

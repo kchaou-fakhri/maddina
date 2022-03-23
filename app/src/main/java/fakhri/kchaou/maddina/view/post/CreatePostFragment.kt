@@ -1,22 +1,24 @@
 package fakhri.kchaou.maddina.view.post
 
 
+import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import fakhri.kchaou.maddina.R
 import fakhri.kchaou.maddina.databinding.FragmentCreatePostBinding
-import fakhri.kchaou.maddina.view.HomeActivity
 import fakhri.kchaou.maddina.view.profile.ProfileFragment
 import fakhri.kchaou.maddina.viewmodel.PostVM
 
@@ -26,6 +28,7 @@ class CreatePostFragment : Fragment() {
     private var _binding  : FragmentCreatePostBinding? = null
     private val binding get() =_binding!!
     lateinit var alertDialog : AlertDialog
+    private  var uriImage : Uri? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,8 +45,7 @@ class CreatePostFragment : Fragment() {
         val postVM  = ViewModelProvider(this).get(PostVM::class.java)
 
         binding.btnBack.setOnClickListener   {
-
-            returnToHome()
+           returnToHome()
         }
         binding.cancel.setOnClickListener    {
             binding.postText.setText("")
@@ -56,7 +58,7 @@ class CreatePostFragment : Fragment() {
 
             var postText = binding.postText.text.toString()
 
-            if (postText.length >0){
+            if (postText.length >0 || uriImage != null){
                 var dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.loading_alert, null)
                 val builder    = AlertDialog.Builder(requireContext())
                     .setView(dialogView)
@@ -65,9 +67,10 @@ class CreatePostFragment : Fragment() {
 
                 alertDialog = builder.show()
 
-                var result = postVM.createPost(userId, postText)
+                var result = postVM.createPost(userId, postText, uriImage)
                 result.observe(viewLifecycleOwner, Observer {
                     if (it == true){
+                        alertDialog.dismiss()
                         Toast.makeText(this.context,"تم إضافة قصتك ", Toast.LENGTH_LONG).show();
                         returnToHome()
 
@@ -82,15 +85,28 @@ class CreatePostFragment : Fragment() {
                 binding.postTextLabel.helperText = "لا يمكن إضافة قصة فارغة"
             }
         }
+        binding.addImageViedo.setOnClickListener {
+            val intent = Intent()
+            intent.setAction(Intent.ACTION_GET_CONTENT)
+            intent.setType("image/*")
+            startActivityForResult(intent,2)
+
+        }
 
 
+        val  callbacks = object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+               returnToHome()
+            }
+
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(callbacks)
 
 
         return binding.root
     }
 
     fun returnToHome(){
-        alertDialog.dismiss()
         val profileFragment = ProfileFragment()
         val fragmentManager: FragmentManager? = fragmentManager
         val fragmentTransaction = fragmentManager?.beginTransaction()
@@ -100,6 +116,14 @@ class CreatePostFragment : Fragment() {
 
     }
 
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == 2 && resultCode == RESULT_OK && data != null){
+            uriImage = data.data
+
+        }
+    }
 
 
 

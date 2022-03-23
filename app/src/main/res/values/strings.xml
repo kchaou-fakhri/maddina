@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">login</string>
+    <string name="app_name">المدينة</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="app_label">المدينة</string>
@@ -9,6 +9,11 @@
     <string name="music">Music</string>
     <string name="home">Home</string>
     <string name="news">News</string>
+    <string name="back">رجوع</string>
+    <string name="write_samthing">أكتب شيء…</string>
+    <string name="save">حفظ</string>
+    <string name="cancel">إلغاء</string>
+    <string name="image_video">صورة/ فيديو</string>
 
     <string-array name="sex">
         <item name="men">رجل</item>

@@ -49,7 +49,7 @@ class LoginFragment : Fragment() {
                 val builder    = AlertDialog.Builder(requireContext())
                     .setView(dialogView)
                     .setTitle("")
-                    .setCancelable(false)
+                    .setCancelable(true)
 
                 alertDialog = builder.show()
 
@@ -94,10 +94,11 @@ class LoginFragment : Fragment() {
         if(condition){
             val intent = Intent (getActivity(), HomeActivity::class.java)
             getActivity()?.startActivity(intent)
-//            Thread.sleep(2_000)
-//            alertDialog.dismiss()
-        }
+            activity?.finish()
 
+
+        }
+        alertDialog.cancel()
     }
 
 }

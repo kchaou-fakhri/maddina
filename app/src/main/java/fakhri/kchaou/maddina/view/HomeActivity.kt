@@ -54,7 +54,7 @@ class HomeActivity : AppCompatActivity() {
 
                     }
                 }
-                R.id.logout -> {
+                R.id.menu -> {
                     val userVM = UserVM(this)
                     userVM.logout()
                    this.finish()

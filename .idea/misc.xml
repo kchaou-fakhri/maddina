@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Manef JDIDI/Desktop/maddina/app/src/main/res/drawable/ic_home.xml" value="0.356" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/maddina/app/src/main/res/drawable/ic_menu.xml" value="0.1445" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/maddina/app/src/main/res/layout/activity_home.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/maddina/app/src/main/res/layout/activity_login.xml" value="0.358695652173913" />
-        <entry key="..\:/Users/Manef JDIDI/Desktop/maddina/app/src/main/res/layout/fragment_create_post.xml" value="0.5" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/maddina/app/src/main/res/layout/fragment_create_post.xml" value="0.25" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/maddina/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.22" />
         <entry key="app/src/main/res/drawable/shape_bkg.xml" value="0.118" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.2520833333333333" />

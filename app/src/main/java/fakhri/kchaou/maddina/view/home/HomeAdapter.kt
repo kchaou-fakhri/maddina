@@ -1,8 +1,9 @@
 package fakhri.kchaou.maddina.view.home
 
+import android.app.Activity
 import android.content.Context
-import android.graphics.BitmapFactory
-import android.graphics.drawable.Drawable
+import android.util.DisplayMetrics
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import fakhri.kchaou.maddina.R
 import fakhri.kchaou.maddina.model.entity.Post
-import java.io.File
-import java.io.InputStream
-import java.net.URL
 
 
 class HomeAdapter(val context: Context, val posts: ArrayList<Post>):
@@ -29,6 +27,11 @@ class HomeAdapter(val context: Context, val posts: ArrayList<Post>):
                 Glide.with(context /* context */)
                     .load(data.media_url)
                     .into(itemView.findViewById<ImageView>(R.id.post_img))
+                var displayMetrics = DisplayMetrics()
+
+
+
+
 
 
             }

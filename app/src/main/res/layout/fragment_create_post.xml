@@ -122,7 +122,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="16dp"
         android:layout_weight="1"
         android:text="@string/image_video"
         android:textColor="@color/black"
@@ -130,12 +130,10 @@
         app:icon="@drawable/ic_photo"
         app:iconGravity="end"
         app:iconTint="@color/green_color"
-        app:layout_constraintBottom_toTopOf="@+id/add_place"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.971"
+        app:layout_constraintHorizontal_bias="0.96"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/post_text_label"
-        app:layout_constraintVertical_bias="0.0"
         tools:ignore="RtlHardcoded" />
 
     <com.google.android.material.button.MaterialButton
@@ -144,9 +142,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:layout_marginBottom="408dp"
+        android:layout_marginBottom="400dp"
         android:layout_weight="1"
-        android:text="مدينة"
+        android:text="@string/app_name"
         android:textColor="@color/black"
 
         android:textSize="15sp"
@@ -155,8 +153,10 @@
         app:iconTint="#FFD365"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.974"
+        app:layout_constraintHorizontal_bias="0.968"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_image_viedo"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="RtlHardcoded" />
 
     <com.google.android.material.button.MaterialButton
@@ -165,17 +165,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
+        android:layout_marginTop="8dp"
         android:layout_weight="1"
-        android:text="شخص"
-        android:textColor="@color/black"
 
+        android:text="@string/person"
+        android:textColor="@color/black"
         android:textSize="15sp"
         app:icon="@drawable/ic_person"
+
         app:iconGravity="end"
         app:iconTint="#6B4F4F"
-
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.974"
+        app:layout_constraintHorizontal_bias="0.971"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_place"
         tools:ignore="RtlHardcoded" />

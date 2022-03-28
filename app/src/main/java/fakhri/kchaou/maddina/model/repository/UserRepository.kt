@@ -1,15 +1,19 @@
 package fakhri.kchaou.maddina.model.repository
 
 
+import android.app.Application
 import android.content.ContentValues
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.gson.Gson
 import fakhri.kchaou.maddina.model.entity.User
 import fakhri.kchaou.maddina.view.auth.LoginFragment
 import fakhri.kchaou.maddina.view.auth.SignFragment
@@ -95,19 +99,17 @@ class UserRepository<T>(app: T) {
     fun login(email: String, password: String) {
         var loginFragment = _app as LoginFragment
 
-        val sharedPreferences: SharedPreferences? = loginFragment.activity?.getSharedPreferences("user", Context.MODE_PRIVATE)
-        val editor = sharedPreferences?.edit()
+
         loginFragment.updateUI(false)
 
         try {
             auth = Firebase.auth
             auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
                 if(task.isSuccessful){
-                    /********** GET id of current user ***********************/
-                    var id = auth.currentUser?.uid
-                    editor?.putString("userId", id)
-                    editor?.commit()
-                    /********** End GET id of current user *******************/
+                    /********** Save current user ***********************/
+                   getUserBtId(auth.currentUser?.uid.toString()).value
+
+                    /********** End save current user *******************/
 
                     loginFragment.updateUI(true)
                 }
@@ -123,6 +125,29 @@ class UserRepository<T>(app: T) {
 
     }
 
+    fun getUserBtId(id: String): LiveData<User>{
+        val app = _app as LoginFragment
+        val sharedPreferences: SharedPreferences? = app.activity?.getSharedPreferences("user", Context.MODE_PRIVATE)
+        val editor = sharedPreferences?.edit()
+
+        var user = MutableLiveData<User> ()
+
+       db_reference.child(id).get().addOnSuccessListener {
+           user.value = it.getValue(User::class.java)
+           val gson = Gson()
+           val user_json : String = gson.toJson(user.value)
+           editor?.putString("current_user", user_json)
+            editor?.commit()
+           Log.println(Log.ASSERT,"json------", user_json)
+           Log.println(Log.ASSERT,"kotlin------", user.value.toString())
+             Log.println(Log.ASSERT,"------", sharedPreferences?.getString("current_user","").toString())
+
+       }
+
+        return user
+    }
 
 
+    //test2022@test.com
+    //12345678@
 }

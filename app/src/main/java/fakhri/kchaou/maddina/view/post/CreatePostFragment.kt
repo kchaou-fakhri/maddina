@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,8 +18,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.gson.Gson
 import fakhri.kchaou.maddina.R
 import fakhri.kchaou.maddina.databinding.FragmentCreatePostBinding
+import fakhri.kchaou.maddina.model.entity.User
 import fakhri.kchaou.maddina.view.home.HomeFragment
 import fakhri.kchaou.maddina.viewmodel.PostVM
 
@@ -53,8 +56,7 @@ class CreatePostFragment : Fragment() {
 
         }
         binding.btnCreate.setOnClickListener {
-            val sharedPreferences: SharedPreferences? = this.activity?.getSharedPreferences("user", Context.MODE_PRIVATE)
-            val userId :String = sharedPreferences?.getString("userId", "").toString()
+
 
             var postText = binding.postText.text.toString()
 
@@ -67,7 +69,17 @@ class CreatePostFragment : Fragment() {
 
                 alertDialog = builder.show()
 
-                var result = postVM.createPost(userId, postText, uriImage)
+                /************ Get Current user from sharedpreference *****************/
+                val sharedPreferences: SharedPreferences? =  activity?.getSharedPreferences("user", Context.MODE_PRIVATE)
+                val user_json : String? = sharedPreferences?.getString("current_user", "")
+                val gson = Gson()
+                val user: User =
+                 gson.fromJson(user_json, User::class.java)
+
+                Log.println(Log.ASSERT,"",user.toString())
+                /************ End get Current user from sharedpreference *************/
+
+                var result = postVM.createPost(user, postText, uriImage)
                 result.observe(viewLifecycleOwner, Observer {
                     if (it == true){
                         alertDialog.dismiss()

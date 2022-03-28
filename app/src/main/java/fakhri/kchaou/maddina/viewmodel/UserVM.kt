@@ -1,5 +1,7 @@
 package fakhri.kchaou.maddina.viewmodel
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import fakhri.kchaou.maddina.model.entity.User
 import fakhri.kchaou.maddina.model.repository.UserRepository
@@ -10,8 +12,8 @@ class UserVM<T>(val app: T) : ViewModel() {
     val userRepository = UserRepository(app)
 
 
-    fun addUser(name : String,email :String, password :String , sex: String) {
-        val user = User(null,name,email, password, sex)
+    fun addUser(name : String,email :String, password :String, sex: String) {
+        val user = User(name,email, password, sex)
          userRepository.add(user)
     }
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
 
 
-    tools:context=".view.post.CreatePostFragment">
+    tools:context=".view.profile.UserFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout2"
@@ -54,44 +54,53 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="55dp"
         android:layout_width="match_parent"
-        android:layout_height="676dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="0dp">
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/white"
+        app:cardCornerRadius="50dp"
+        tools:layout_editor_absoluteX="13dp"
+        tools:layout_editor_absoluteY="323dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:clickable="true"
+        <ImageView
+            android:id="@+id/user_pic"
+            android:layout_marginTop="15dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:src="@drawable/user"
-            app:civ_border_color="#C3C2C0"
-            app:civ_border_width="1dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.917"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_gravity="center_horizontal"></ImageView>
 
         <TextView
-            android:id="@+id/username"
-            android:layout_width="wrap_content"
+            android:id="@+id/user_name"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:fontFamily="@font/cairo_light"
-            android:text="فخري كشو"
+            android:layout_marginTop="150dp"
+            android:text="ohghioH IOHgioh"
+            android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/profile_image"
-            app:layout_constraintHorizontal_bias="0.914"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="20dp">
+
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="General"
+                android:textColor="#757373"
+                android:textSize="17dp">
+            </TextView>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

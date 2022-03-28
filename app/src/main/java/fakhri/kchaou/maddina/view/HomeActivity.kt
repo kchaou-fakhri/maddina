@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import fakhri.kchaou.maddina.R
+import fakhri.kchaou.maddina.view.profile.UserFragment
 import fakhri.kchaou.maddina.view.post.CreatePostFragment
 import fakhri.kchaou.maddina.view.home.HomeFragment
 import fakhri.kchaou.maddina.viewmodel.UserVM
@@ -14,6 +15,7 @@ class HomeActivity : AppCompatActivity() {
 
     lateinit var createPostFragment: CreatePostFragment
     lateinit var profileFragment : HomeFragment
+    lateinit var userFragment : UserFragment
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +27,7 @@ class HomeActivity : AppCompatActivity() {
         bottomNavigationView.selectedItemId = R.id.home
         createPostFragment = CreatePostFragment()
         profileFragment    = HomeFragment()
+        userFragment = UserFragment()
 
 
         supportFragmentManager.beginTransaction().apply {
@@ -47,6 +50,13 @@ class HomeActivity : AppCompatActivity() {
                 R.id.home -> {
                     supportFragmentManager.beginTransaction().apply {
                         replace(R.id.home_fragment, profileFragment)
+                        commit()
+
+                    }
+                }
+                R.id.profile -> {
+                    supportFragmentManager.beginTransaction().apply {
+                        replace(R.id.home_fragment, userFragment)
                         commit()
 
                     }

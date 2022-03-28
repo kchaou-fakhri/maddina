@@ -12,15 +12,22 @@
         <entry key="..\:/Users/Manef JDIDI/Desktop/maddina/app/src/main/res/layout/fragment_sign.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/maddina/app/src/main/res/layout/list_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/maddina/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.22" />
+        <entry key="app/src/main/res/drawable/ic_comment.xml" value="0.159" />
+        <entry key="app/src/main/res/drawable/ic_favorite.xml" value="0.159" />
+        <entry key="app/src/main/res/drawable/ic_favorite1.xml" value="0.159" />
         <entry key="app/src/main/res/drawable/shape_bkg.xml" value="0.118" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.2520833333333333" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19739583333333333" />
+        <entry key="app/src/main/res/layout/fragment_create_post.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.19739583333333333" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.19739583333333333" />
         <entry key="app/src/main/res/layout/fragment_sign.xml" value="0.25" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.1765625" />
         <entry key="app/src/main/res/layout/loading_alert.xml" value="0.33" />
         <entry key="app/src/main/res/layout/login_main.xml" value="0.19739583333333333" />
+        <entry key="app/src/main/res/layout/post_item.xml" value="0.33" />
       </map>
     </option>
   </component>

@@ -19,7 +19,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import fakhri.kchaou.maddina.R
 import fakhri.kchaou.maddina.databinding.FragmentCreatePostBinding
-import fakhri.kchaou.maddina.view.profile.ProfileFragment
+import fakhri.kchaou.maddina.view.home.HomeFragment
 import fakhri.kchaou.maddina.viewmodel.PostVM
 
 
@@ -107,7 +107,7 @@ class CreatePostFragment : Fragment() {
     }
 
     fun returnToHome(){
-        val profileFragment = ProfileFragment()
+        val profileFragment = HomeFragment()
         val fragmentManager: FragmentManager? = fragmentManager
         val fragmentTransaction = fragmentManager?.beginTransaction()
         fragmentTransaction?.replace(R.id.home_fragment, profileFragment)

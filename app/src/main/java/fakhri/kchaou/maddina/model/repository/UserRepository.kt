@@ -107,7 +107,7 @@ class UserRepository<T>(app: T) {
             auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
                 if(task.isSuccessful){
                     /********** Save current user ***********************/
-                   getUserBtId(auth.currentUser?.uid.toString()).value
+                    getCurrentUserById(auth.currentUser?.uid.toString()).value
 
                     /********** End save current user *******************/
 
@@ -125,7 +125,7 @@ class UserRepository<T>(app: T) {
 
     }
 
-    fun getUserBtId(id: String): LiveData<User>{
+    fun getCurrentUserById(id: String): LiveData<User>{
         val app = _app as LoginFragment
         val sharedPreferences: SharedPreferences? = app.activity?.getSharedPreferences("user", Context.MODE_PRIVATE)
         val editor = sharedPreferences?.edit()
@@ -138,16 +138,26 @@ class UserRepository<T>(app: T) {
            val user_json : String = gson.toJson(user.value)
            editor?.putString("current_user", user_json)
             editor?.commit()
-           Log.println(Log.ASSERT,"json------", user_json)
-           Log.println(Log.ASSERT,"kotlin------", user.value.toString())
-             Log.println(Log.ASSERT,"------", sharedPreferences?.getString("current_user","").toString())
 
        }
 
         return user
     }
 
+    fun getUserById(id: String): LiveData<User>{
 
-    //test2022@test.com
-    //12345678@
+        var user = MutableLiveData<User> ()
+
+        db_reference.child(id).get().addOnSuccessListener {
+            user.value = it.getValue(User::class.java)
+            val gson = Gson()
+            val user_json : String = gson.toJson(user.value)
+
+        }
+
+        return user
+    }
+
+
+
 }

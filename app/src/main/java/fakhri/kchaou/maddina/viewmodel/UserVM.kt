@@ -2,6 +2,7 @@ package fakhri.kchaou.maddina.viewmodel
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import fakhri.kchaou.maddina.model.entity.User
 import fakhri.kchaou.maddina.model.repository.UserRepository
@@ -28,6 +29,10 @@ class UserVM<T>(val app: T) : ViewModel() {
 
     fun logout(){
         userRepository.logout()
+    }
+
+    fun getUserById(id :String) : LiveData<User>{
+        return userRepository.getUserById(id)
     }
 
 

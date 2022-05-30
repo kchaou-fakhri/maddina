@@ -36,7 +36,7 @@ class PostRepository {
 
                     var uploadTask=  ref.putFile(uriImage)
 
-                    val urlTask = uploadTask.continueWithTask { task ->
+                   uploadTask.continueWithTask { task ->
                         if (!task.isSuccessful) {
                             task.exception?.let {
                                 throw it
@@ -80,7 +80,9 @@ class PostRepository {
                    for(item in it.children){
                        post = item.getValue(Post::class.java)!!
                        posts.add(post)
+
                    }
+                Log.println(Log.ASSERT, "getting data", posts.toString())
 
                 mutableLiveData.value = posts
 

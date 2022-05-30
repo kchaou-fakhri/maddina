@@ -20,6 +20,9 @@ class UserRepository<T>(app: T) {
     private val db_reference = database.getReference("users")
     private lateinit var auth: FirebaseAuth
 
+    init {
+
+    }
 
 
 
@@ -29,7 +32,7 @@ class UserRepository<T>(app: T) {
     fun insertTORealTimeDataBase(user: User){
 
         user.password =""
-        val database = Firebase.database
+
         val refDB = database.getReference("users")
 
         refDB.child(user.id.toString()).setValue(user)
@@ -123,6 +126,15 @@ class UserRepository<T>(app: T) {
 
     }
 
+
+    fun getUserById(user: User){
+//        var leadsRef = database.ref('leads');
+//        leadsRef.on('value', function(snapshot) {
+//            snapshot.forEach(function(childSnapshot) {
+//                var childData = childSnapshot.val();
+//            });
+//        });
+    }
 
 
 }

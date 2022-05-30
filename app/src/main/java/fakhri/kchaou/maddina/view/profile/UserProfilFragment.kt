@@ -8,17 +8,22 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import fakhri.kchaou.maddina.R
 import fakhri.kchaou.maddina.databinding.FragmentProfileBinding
+import fakhri.kchaou.maddina.model.entity.Post
+import fakhri.kchaou.maddina.view.home.HomeAdapter
 import fakhri.kchaou.maddina.view.home.HomeFragment
 import fakhri.kchaou.maddina.viewmodel.PostVM
 
 
-class UserFragment : Fragment() {
+class UserProfilFragment : Fragment() {
 
     private var _binding  : FragmentProfileBinding? = null
     private val binding get() =_binding!!
+    var posts : ArrayList<Post> = ArrayList()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,19 +38,18 @@ class UserFragment : Fragment() {
     ): View? {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        binding.btnBack.setOnClickListener   {
-            returnToHome()
-        }
-        binding.username.setOnClickListener    {
 
-            Toast.makeText(this.context, "test", Toast.LENGTH_SHORT).show()
-            binding.username.setText("Manef Jedidi")
-        }
-/*        binding.profile_image.setOnClickListener    {
+        val postvm = PostVM()
 
-            Toast.makeText(this.context, "test", Toast.LENGTH_SHORT).show()
 
-        }*/
+        postvm.getPost().observe(viewLifecycleOwner, Observer {
+            posts.addAll(it)
+//            Log.println(Log.ASSERT, "-----", it.size.toString())
+            val adapter = HomeAdapter(requireContext(),posts )
+            binding.rcPosts.layoutManager = LinearLayoutManager(requireContext())
+            binding.rcPosts.adapter = adapter
+
+        })
 
         return binding.root
     }

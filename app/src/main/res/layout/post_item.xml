@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
     app:cardCornerRadius="5dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -67,14 +67,14 @@
         app:layout_constraintTop_toBottomOf="@+id/username"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
+    <fakhri.kchaou.maddina.view.ScaleImageView
         android:background="#F4F3F3"
         android:id="@+id/post_img"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="230dp"
         android:layout_marginTop="5dp"
         android:maxHeight="200dp"
-
+        android:adjustViewBounds="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"

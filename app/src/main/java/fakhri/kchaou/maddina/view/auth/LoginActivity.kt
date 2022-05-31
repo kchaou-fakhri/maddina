@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import fakhri.kchaou.maddina.R
-import fakhri.kchaou.maddina.view.HomeActivity
+import fakhri.kchaou.maddina.view.home.HomeActivity
 import fakhri.kchaou.maddina.viewmodel.UserVM
 
 
@@ -14,7 +14,7 @@ class LoginActivity : AppCompatActivity() {
 
     val loginFragment = LoginFragment()
     val signFragment = SignFragment()
-    val userVM = UserVM(this)
+    val userVM = UserVM()
 
 
 
@@ -23,15 +23,9 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        if (userVM.ifLogin() != null){
 
-            val intent = Intent (this, HomeActivity::class.java)
-            startActivity(intent)
-            this.finish()
 
-        }
 
-        else{
 
             var btn_goToLogin = findViewById<Button>(R.id.go_to_login)
             var btn_goToSign = findViewById<Button>(R.id.go_to_signup)
@@ -69,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
                     replace(R.id.auth_fragment, signFragment)
                     commit()
                 }
-            }
+
 
         }
 

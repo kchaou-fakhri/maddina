@@ -1,23 +1,29 @@
 package fakhri.kchaou.maddina.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import fakhri.kchaou.maddina.model.entity.User
 import fakhri.kchaou.maddina.model.repository.UserRepository
+import fakhri.kchaou.maddina.utils.Message
 
-class UserVM<T>(val app: T) : ViewModel() {
-
-
-    val userRepository = UserRepository(app)
+class UserVM() : ViewModel() {
 
 
-    fun addUser(name : String,email :String, password :String , sex: String) {
-        val user = User(null,name,email, password, sex)
-         userRepository.add(user)
+    lateinit var userRepository : UserRepository
+
+    init {
+        userRepository = UserRepository()
     }
 
-    fun login(email :String, password :String ) {
 
-        userRepository.login(email, password)
+    fun addUser(name : String,email :String, password :String , sex: String) : LiveData<Message>{
+        val user = User(null,name,email, password, sex)
+        return userRepository.add(user)
+    }
+
+    fun login(email :String, password :String ) : LiveData<Message>{
+
+      return  userRepository.login(email, password)
     }
 
     fun ifLogin() : String?{
@@ -28,6 +34,10 @@ class UserVM<T>(val app: T) : ViewModel() {
         userRepository.logout()
     }
 
+    fun getUserById(id: String) : LiveData<User>{
+
+        return userRepository.getUserById(id)
+    }
 
 
 }

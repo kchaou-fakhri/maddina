@@ -19,7 +19,7 @@
         <item name="men">رجل</item>
         <item name="women">مرأة</item>
     </string-array>
-    
+
     <string name="loremipsom">هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها. ولذلك يتم استخدام طريقة لوريم إيبسوم</string>
     <string name="add_freind">إضافة</string>
     <string name="edit_profil">تعديل الحساب</string>

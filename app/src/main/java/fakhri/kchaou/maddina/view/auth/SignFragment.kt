@@ -2,7 +2,9 @@ package fakhri.kchaou.maddina.view.auth
 
 
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Patterns
 import androidx.fragment.app.Fragment
@@ -10,11 +12,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import fakhri.kchaou.maddina.R
 import fakhri.kchaou.maddina.databinding.FragmentSignBinding
 
 
 import fakhri.kchaou.maddina.viewmodel.UserVM
+import java.util.*
 
 class SignFragment : Fragment() {
 
@@ -31,7 +35,7 @@ class SignFragment : Fragment() {
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.list_item, sex)
 
         binding.btnSign.setOnClickListener {
-            val userVM = UserVM(this)
+            val userVM = UserVM()
 
             /********* validet the text filde format **********/
             var sex = binding.menu.text.toString()
@@ -53,7 +57,20 @@ class SignFragment : Fragment() {
                     "رجل"-> sex = "men"
                     else -> sex = "women"
                 }
-                 userVM.addUser(username, email, password, sex)
+                userVM.addUser(username, email, password, sex).observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+
+                    if(it.statu.equals(true)){
+                        updateUI(true)
+                        val sharedPreferences: SharedPreferences =requireContext().getSharedPreferences("user", Context.MODE_PRIVATE)
+                        val editor = sharedPreferences.edit()
+                        editor.putString("userId",     it.message)
+                        editor.commit()
+                    }
+                    else{
+                        updateUI(false)
+                        Toast.makeText(requireContext(),it.message, Toast.LENGTH_LONG).show();
+                    }
+                })
 
             }
         }
@@ -113,6 +130,7 @@ class SignFragment : Fragment() {
         if(condition){
             val intent = Intent (getActivity(), LoginActivity::class.java)
             getActivity()?.startActivity(intent)
+            requireActivity().finish()
         }
 
     }

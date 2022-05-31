@@ -1,16 +1,20 @@
 package fakhri.kchaou.maddina.view.auth
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import fakhri.kchaou.maddina.R
 import fakhri.kchaou.maddina.databinding.FragmentLoginBinding
-import fakhri.kchaou.maddina.view.HomeActivity
+import fakhri.kchaou.maddina.view.home.HomeActivity
 import fakhri.kchaou.maddina.viewmodel.UserVM
 
 
@@ -30,7 +34,7 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-            val userVM = UserVM(this)
+            val userVM = UserVM()
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
 
@@ -55,7 +59,20 @@ class LoginFragment : Fragment() {
 
                 alertDialog = builder.show()
 
-                userVM.login(email, password)
+                userVM.login(email, password).observe(viewLifecycleOwner, Observer {
+
+                    if(it.statu.equals(true)){
+                        updateUI(true)
+                        val sharedPreferences: SharedPreferences =requireContext().getSharedPreferences("user", Context.MODE_PRIVATE)
+                        val editor = sharedPreferences.edit()
+                        editor.putString("userId",     it.message)
+                        editor.commit()
+                    }
+                    else{
+                        Toast.makeText(requireContext(),it.message, Toast.LENGTH_LONG).show();
+                        updateUI(false)
+                    }
+                })
             }
             else{
 

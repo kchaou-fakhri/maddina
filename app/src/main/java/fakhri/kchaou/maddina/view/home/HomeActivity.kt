@@ -1,4 +1,4 @@
-package fakhri.kchaou.maddina.view
+package fakhri.kchaou.maddina.view.home
 
 
 import android.os.Bundle
@@ -7,9 +7,8 @@ import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import fakhri.kchaou.maddina.R
-import fakhri.kchaou.maddina.view.home.HomeFragment
 import fakhri.kchaou.maddina.view.post.CreatePostFragment
 import fakhri.kchaou.maddina.view.profile.UserProfilFragment
 import fakhri.kchaou.maddina.viewmodel.UserVM
@@ -18,7 +17,7 @@ import fakhri.kchaou.maddina.viewmodel.UserVM
 class HomeActivity : AppCompatActivity() {
 
     lateinit var createPostFragment: CreatePostFragment
-    lateinit var profileFragment : HomeFragment
+    lateinit var homeFragment : HomeFragment
     lateinit var userProfilFragment : UserProfilFragment
 
 
@@ -39,59 +38,66 @@ class HomeActivity : AppCompatActivity() {
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.white))
         setContentView(R.layout.activity_home)
 
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNavigationView.selectedItemId = R.id.home
+
+        val bottomNavigation = findViewById<MeowBottomNavigation>(R.id.bottom_navigation)
+
+        bottomNavigation.add(MeowBottomNavigation.Model(1, R.drawable.ic_profile))
+        bottomNavigation.add(MeowBottomNavigation.Model(2, R.drawable.ic_create))
+        bottomNavigation.add(MeowBottomNavigation.Model(3, R.drawable.ic_home))
+        bottomNavigation.add(MeowBottomNavigation.Model(4, R.drawable.ic_news))
+
+        bottomNavigation.show(3, true)
+
         createPostFragment = CreatePostFragment()
-        profileFragment    = HomeFragment()
+        homeFragment = HomeFragment()
         userProfilFragment = UserProfilFragment()
 
 
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.home_fragment, profileFragment)
+            replace(R.id.home_fragment, homeFragment)
             commit()
 
         }
+        bottomNavigation.setOnShowListener {
+            when (it.id) {
 
-
-
-        bottomNavigationView.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.create_post -> {
+                2 -> {
                     supportFragmentManager.beginTransaction().apply {
                         replace(R.id.home_fragment, createPostFragment)
                         commit()
 
                     }
-                  }
-                R.id.home -> {
+                }
+                3 -> {
                     supportFragmentManager.beginTransaction().apply {
 
-                        replace(R.id.home_fragment, profileFragment)
+                        replace(R.id.home_fragment, homeFragment)
                         commit()
 
                     }
                 }
-                R.id.profile -> {
+                1 -> {
                     supportFragmentManager.beginTransaction().apply {
                         replace(R.id.home_fragment, userProfilFragment)
                         commit()
 
                     }
                 }
-                R.id.menu -> {
-                    val userVM = UserVM(this)
+                4 -> {
+                    val userVM = UserVM()
                     userVM.logout()
-                   this.finish()
+                    this.finish()
                 }
 
             }
-            true
         }
 
 
+
+
+        }
     }
 
 
 
 
-}

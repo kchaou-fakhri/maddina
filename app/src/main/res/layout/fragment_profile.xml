@@ -65,7 +65,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <fakhri.kchaou.maddina.view.ScaleImageView
+    <fakhri.kchaou.maddina.utils.ScaleImageView
         android:layout_width="fill_parent"
         android:layout_height="180dp"
         android:adjustViewBounds="true"

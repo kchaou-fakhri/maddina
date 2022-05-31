@@ -1,4 +1,4 @@
-package fakhri.kchaou.maddina.view;
+package fakhri.kchaou.maddina.utils;
 
 import android.content.Context;
 import android.content.res.TypedArray;

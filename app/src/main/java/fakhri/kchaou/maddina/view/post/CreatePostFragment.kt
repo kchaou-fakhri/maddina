@@ -19,12 +19,16 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import fakhri.kchaou.maddina.R
 import fakhri.kchaou.maddina.databinding.FragmentCreatePostBinding
+import fakhri.kchaou.maddina.model.entity.User
 import fakhri.kchaou.maddina.view.home.HomeFragment
 import fakhri.kchaou.maddina.viewmodel.PostVM
+import fakhri.kchaou.maddina.viewmodel.UserVM
 
 
 class CreatePostFragment : Fragment() {
 
+    lateinit var userVM : UserVM
+    lateinit var postVM : PostVM
     private var _binding  : FragmentCreatePostBinding? = null
     private val binding get() =_binding!!
     lateinit var alertDialog : AlertDialog
@@ -42,7 +46,10 @@ class CreatePostFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCreatePostBinding.inflate(inflater, container, false)
-        val postVM  = ViewModelProvider(this).get(PostVM::class.java)
+
+        postVM  = ViewModelProvider(this).get(PostVM::class.java)
+        userVM = UserVM()
+
 
         binding.btnBack.setOnClickListener   {
            returnToHome()
@@ -67,7 +74,10 @@ class CreatePostFragment : Fragment() {
 
                 alertDialog = builder.show()
 
-                var result = postVM.createPost(userId, postText, uriImage)
+                userVM.getUserById(userId).observe(viewLifecycleOwner, Observer {
+                    var result = postVM.createPost(it, postText, uriImage)
+
+
                 result.observe(viewLifecycleOwner, Observer {
                     if (it == true){
                         alertDialog.dismiss()
@@ -80,6 +90,7 @@ class CreatePostFragment : Fragment() {
                         Toast.makeText(this.context,"حدث خطأ ما, حاول لاحقا", Toast.LENGTH_LONG).show();
                     }
            });
+                })
 
             }else{
                 binding.postTextLabel.helperText = "لا يمكن إضافة قصة فارغة"

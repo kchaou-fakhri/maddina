@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="progressBarStyle" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
-        <item name="android:indeterminateDrawable">@drawable/greenprogress</item>
-        <item name="indeterminateAnimationType">contiguous</item>
-    </style>
+
+
+        <style name="roundedImageView" parent="">
+            <item name="cornerFamily">rounded</item>
+            <item name="cornerSize">50dp</item>
+        </style>
+
 </resources>

@@ -2,14 +2,17 @@ package fakhri.kchaou.maddina.model.repository.remote
 
 import android.net.Uri
 import android.util.Log
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import fakhri.kchaou.maddina.model.entity.Post
+import fakhri.kchaou.maddina.model.entity.User
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class PostRemote {
 
@@ -18,11 +21,13 @@ class PostRemote {
     private val storage_referance = FirebaseStorage.getInstance().getReference()
 
 
-    fun createPost(id: String, text: String, uriImage: Uri?) : LiveData<Boolean> {
+    fun createPost(user : User, text: String, uriImage: Uri?) : LiveData<Boolean> {
         val mutableLiveData = MutableLiveData<Boolean>()
+        val userRemote = UserRemote()
 
         try {
-            val post = Post( id, text)
+
+            val post = Post( user, text)
             if( uriImage == null){
 
                 db_reference.push().setValue(post)
@@ -30,7 +35,7 @@ class PostRemote {
             }
             else {
 
-                val ref = storage_referance.child("post/${id+ Date().toString().replace(" ","") }")
+                val ref = storage_referance.child("post/${user.id+ Date().toString().replace(" ","") }")
 
                 var uploadTask=  ref.putFile(uriImage)
 
@@ -75,9 +80,11 @@ class PostRemote {
         db_reference.get().addOnSuccessListener {
             //  Log.i("firebase", "Got value ${it.value}")
             var post : Post
+            Log.println(Log.ASSERT, "Error getting data", it.toString())
             for(item in it.children){
-                post = item.getValue(Post::class.java)!!
-                posts.add(post)
+
+                post = item.value as Post
+              posts.add(post)
 
             }
             //Log.println(Log.ASSERT, "getting data", posts.toString())

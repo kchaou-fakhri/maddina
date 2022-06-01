@@ -148,7 +148,7 @@ class UserRemote (){
         db_reference.child(id).get().addOnSuccessListener {
          //   Log.println(Log.ASSERT,"firebase--------------------------------------", "Got value ${it.getValue()}")
             val td: Map<String, String> = it.value as Map<String, String>
-         mutableLiveData.value = User(td.get("id"),td.get("name")!!,td.get("email")!!, td.get("sex")!!)
+         mutableLiveData.value = User(td.get("id"),td.get("name")!!,td.get("email")!!,"" , td.get("sex")!!)
         }.addOnFailureListener{
             Log.e("firebase", "Error getting data", it)
         }

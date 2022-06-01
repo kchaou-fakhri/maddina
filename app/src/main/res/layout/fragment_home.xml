@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
 
-    tools:context=".view.home.HomeActivity">">
+    tools:context=".view.home.HomeActivity">
 
 
 
@@ -15,6 +15,17 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_menu"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintEnd_toStartOf="@+id/app_name"
+            app:layout_constraintHorizontal_bias="0.067"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.432" />
 
         <TextView
             android:id="@+id/app_name"
@@ -33,10 +44,11 @@
 
         <LinearLayout
 
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#BEC0CC"
 
+            android:background="#BEC0CC"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/stories"
             app:layout_constraintTop_toBottomOf="@+id/app_name" />
@@ -47,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:layout_marginTop="16dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginEnd="80dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.022"
             app:layout_constraintStart_toStartOf="@+id/app_name"
@@ -57,94 +69,31 @@
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="2dp"
             android:layout_marginTop="10dp"
             android:background="#BEC0CC"
-            app:layout_constraintBottom_toTopOf="@+id/email"
+            android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/stories"
-            app:layout_constraintVertical_bias="0.0"
-            android:orientation="horizontal" />
-
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/user_image"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@drawable/user"
-            app:civ_border_color="#fff"
-            app:civ_border_width="2dp"
-            android:layout_marginRight="4dp"
-            app:layout_constraintBottom_toBottomOf="@+id/email"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/email"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <ImageView
-            android:id="@+id/user_image2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:src="@drawable/ic_photos"
-            app:civ_border_color="#fff"
-            app:civ_border_width="2dp"
-            app:iconTint="@color/green_color"
-            app:layout_constraintBottom_toBottomOf="@+id/email"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            app:layout_constraintVertical_bias="0.68" />
-
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="65dp"
-
-            android:background="@drawable/input_bkg"
-
-            android:drawablePadding="10dp"
-            android:gravity="right|center"
-            android:hint="@string/write_samthing"
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textColorHint="@color/black"
-            app:layout_constraintEnd_toStartOf="@+id/user_image"
-            app:layout_constraintStart_toStartOf="@+id/stories"
             app:layout_constraintTop_toBottomOf="@+id/stories" />
 
-        <LinearLayout
 
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="#BEC0CC"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/rv_post_list"
-            app:layout_constraintTop_toBottomOf="@+id/email" />
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_post_list"
-
+            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
 
 
             android:nestedScrollingEnabled="false"
 
-            app:layout_constraintBottom_toBottomOf="parent"
-
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stories"
             tools:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             tools:spanCount="3" />
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

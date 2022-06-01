@@ -1,20 +1,15 @@
 package fakhri.kchaou.maddina.model.repository.remote
 
-import android.content.ContentValues
-import android.content.Context
-import android.content.SharedPreferences
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import fakhri.kchaou.maddina.model.entity.User
 import fakhri.kchaou.maddina.utils.Message
-import fakhri.kchaou.maddina.view.auth.LoginFragment
-import fakhri.kchaou.maddina.view.auth.SignFragment
 
 class UserRemote (){
     private val database = Firebase.database
@@ -151,8 +146,9 @@ class UserRemote (){
         var mutableLiveData = MutableLiveData<User>()
 
         db_reference.child(id).get().addOnSuccessListener {
-            Log.i("firebase--------------------------------------", "Got value ${it.value}")
-            mutableLiveData.value = it.value as User
+         //   Log.println(Log.ASSERT,"firebase--------------------------------------", "Got value ${it.getValue()}")
+            val td: Map<String, String> = it.value as Map<String, String>
+         mutableLiveData.value = User(td.get("id"),td.get("name")!!,td.get("email")!!, td.get("sex")!!)
         }.addOnFailureListener{
             Log.e("firebase", "Error getting data", it)
         }

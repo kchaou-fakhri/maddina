@@ -41,10 +41,11 @@ class HomeActivity : AppCompatActivity() {
 
         val bottomNavigation = findViewById<MeowBottomNavigation>(R.id.bottom_navigation)
 
-        bottomNavigation.add(MeowBottomNavigation.Model(1, R.drawable.ic_profile))
-        bottomNavigation.add(MeowBottomNavigation.Model(2, R.drawable.ic_create))
+        bottomNavigation.add(MeowBottomNavigation.Model(1, R.drawable.ic_user))
+        bottomNavigation.add(MeowBottomNavigation.Model(2, R.drawable.ic_write))
         bottomNavigation.add(MeowBottomNavigation.Model(3, R.drawable.ic_home))
-        bottomNavigation.add(MeowBottomNavigation.Model(4, R.drawable.ic_news))
+        bottomNavigation.add(MeowBottomNavigation.Model(4, R.drawable.ic_chat))
+        bottomNavigation.add(MeowBottomNavigation.Model(5, R.drawable.ic_search))
 
         bottomNavigation.show(3, true)
 

@@ -53,8 +53,8 @@ class UserProfilFragment : Fragment() {
 
 
             userVM.getUserById(id).observe(viewLifecycleOwner, Observer {
-                Log.println(Log.ASSERT,"firebase", "Got value ${it}")
-                Log.println(Log.ASSERT,"firebase", id)
+              binding.username.text = it.name
+
             })
 
 

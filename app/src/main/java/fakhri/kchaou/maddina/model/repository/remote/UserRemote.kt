@@ -62,7 +62,7 @@ class UserRemote (){
         try {
 
             auth = Firebase.auth
-            auth.createUserWithEmailAndPassword(user.email, user.password)
+            auth.createUserWithEmailAndPassword(user.email!!, user.password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         user.id = auth.currentUser?.uid

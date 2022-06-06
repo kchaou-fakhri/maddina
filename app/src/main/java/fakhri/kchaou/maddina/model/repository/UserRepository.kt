@@ -19,11 +19,7 @@ import fakhri.kchaou.maddina.view.auth.SignFragment
 
 class UserRepository() {
 
-    lateinit var userRemote: UserRemote
-
-    init {
-        userRemote = UserRemote()
-    }
+    var userRemote: UserRemote = UserRemote()
 
 
     fun add(user: User) :LiveData<Message> {

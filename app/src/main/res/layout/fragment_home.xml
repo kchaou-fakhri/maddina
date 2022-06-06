@@ -71,6 +71,7 @@
             app:layout_constraintTop_toBottomOf="@+id/app_name" />
 
 
+
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
@@ -82,17 +83,17 @@
             app:layout_constraintTop_toBottomOf="@+id/stories" />
 
 
-
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_post_list"
-            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+
+
             android:background="@color/gray"
 
             android:nestedScrollingEnabled="false"
-
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/stories"
             tools:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             tools:spanCount="3" />

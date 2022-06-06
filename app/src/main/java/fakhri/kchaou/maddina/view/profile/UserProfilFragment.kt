@@ -41,7 +41,7 @@ class UserProfilFragment : Fragment() {
     ): View? {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        val postvm = PostVM()
+
         val userVM = UserVM()
 
         /********** read the id of user from Sharedpreference to get data from firebase *****************/

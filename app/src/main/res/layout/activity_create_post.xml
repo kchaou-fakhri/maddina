@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
 
 
-    tools:context=".view.post.CreatePostFragment">
+    tools:context=".view.post.CreatePostActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout2"

@@ -2,7 +2,6 @@ package fakhri.kchaou.maddina.view.home
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -35,7 +34,9 @@ class HomeFragment : Fragment() {
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+
         val postvm = PostVM()
+
 
         var dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.loading_alert, null)
         val builder    = AlertDialog.Builder(requireContext())
@@ -43,28 +44,47 @@ class HomeFragment : Fragment() {
             .setTitle("")
             .setCancelable(true)
 
+
         alertDialog = builder.show()
 
         postvm.getPost().observe(viewLifecycleOwner, Observer {
 //           posts.addAll(it)
-//            Log.println(Log.ASSERT, "-----", it.size.toString())
+
+
             val adapter = HomeAdapter(requireContext(),it )
             binding.rvPostList.layoutManager = LinearLayoutManager(requireContext())
             binding.rvPostList.adapter = adapter
 
-            val adapterStory = StoriesAdapter(requireContext(),it )
+            for (item in it){
+                if (item.media_url == ""){
+                    it.remove(item)
+                }
+            }
+            posts.clear()
+            posts.add(Post())
+
+
+            /*********** remove the post contains only text ************/
+            for (post in it){
+
+                if (post.media_url != null){
+                    posts.add(post)
+
+                }
+            }
+
+
+            val adapterStory = StoriesAdapter(requireContext(), posts)
             binding.stories.layoutManager = LinearLayoutManager(requireContext())
-            binding.stories.setLayoutManager(
-                LinearLayoutManager(
-                    requireContext(),
-                    LinearLayoutManager.HORIZONTAL,
-                    true
-                )
+            binding.stories.layoutManager = LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.HORIZONTAL,
+                true
             )
 
             binding.stories.adapter = adapterStory
 
-            alertDialog.cancel()
+            alertDialog.dismiss()
         })
 
 

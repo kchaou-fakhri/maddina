@@ -22,31 +22,30 @@ class StoriesAdapter(val context: Context,val posts :ArrayList<Post>):
 //            Glide.with(context /* context */)
 //                .load(data.media_url)
 //                .into(itemView.findViewById<ImageView>(R.id.user_image))
-            if (position ==0){
-                Glide.with(context)
-                    .load(R.drawable.img_add)
-                    .into(itemView.findViewById<ImageView>(R.id.story))
 
-                itemView.findViewById<TextView>(R.id.username).text = context.getString(R.string.create_post)
-                itemView.findViewById<TextView>(R.id.username).textSize = 16.0F
-//                itemView.findViewById<TextView>(R.id.username).gravity = Gravity.LEFT
+                if (position == 0){
+                    Glide.with(context)
+                        .load(R.drawable.img_add)
+                        .into(itemView.findViewById<ImageView>(R.id.story))
 
-            }
-            else{
+                    itemView.findViewById<TextView>(R.id.username).text = context.getString(R.string.create_post)
+                    itemView.findViewById<TextView>(R.id.username).textSize = 16.0F
 
-                Glide.with(context )
-                    .load(data.media_url)
-                    .into(itemView.findViewById<ImageView>(R.id.story))
-                Glide.with(context )
-                    .load(R.drawable.user)
-                    .into(itemView.findViewById<ImageView>(R.id.user_image))
-            }
+                }
+                else{
 
-
+                    Glide.with(context )
+                        .load(data.media_url)
+                        .into(itemView.findViewById<ImageView>(R.id.story))
+                    Glide.with(context )
+                        .load(R.drawable.user)
+                        .into(itemView.findViewById<ImageView>(R.id.user_image))
+                }
 
 
-       //     itemView.findViewById<TextView>(R.id.username).text = data.user.name
 
+
+        //    itemView.findViewById<TextView>(R.id.username).text = data.user.name
 //            itemView.setOnClickListener {
 //                val intent = Intent(context, PictureFullScreen::class.java).apply {
 //                    putExtra("name",data.user.name)

@@ -16,11 +16,8 @@ import kotlin.collections.ArrayList
 
 
 class PostRepository() {
-    lateinit var  postRemote: PostRemote
+     var  postRemote: PostRemote = PostRemote()
 
-    init {
-        postRemote = PostRemote()
-    }
     fun createPost(user: User, text: String, uriImage: Uri?): LiveData<Boolean> {
         return postRemote.createPost(user,text, uriImage)
     }

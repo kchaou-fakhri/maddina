@@ -37,6 +37,7 @@
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/drawable/item_name_bkg.xml" value="0.1925" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/drawable/item_post_bkg.xml" value="0.1925" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/drawable/shape_bkg.xml" value="0.2265" />
+        <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/layout/activity_create_post.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/layout/activity_login.xml" value="0.17395833333333333" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/layout/activity_splash.xml" value="0.18541666666666667" />
@@ -47,7 +48,7 @@
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/layout/fragment_sign.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/layout/list_item.xml" value="0.25" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/layout/loading_alert.xml" value="0.10989583333333333" />
-        <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/layout/post_item.xml" value="0.25" />
+        <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/layout/post_item.xml" value="0.536" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/layout/storie_item.xml" value="0.72" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.3625" />
         <entry key="..\:/Users/thegr8manef/AndroidStudioProjects/maddina/app/src/main/res/layout/activity_home.xml" value="0.1859375" />

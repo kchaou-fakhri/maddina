@@ -1,8 +1,9 @@
 package fakhri.kchaou.maddina.model.repository.remote
 
 import android.net.Uri
+import android.os.Build
 import android.util.Log
-import androidx.lifecycle.LifecycleOwner
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.ktx.database
@@ -10,9 +11,10 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import fakhri.kchaou.maddina.model.entity.Post
 import fakhri.kchaou.maddina.model.entity.User
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 class PostRemote {
 
@@ -21,13 +23,17 @@ class PostRemote {
     private val storage_referance = FirebaseStorage.getInstance().getReference()
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun createPost(user : User, text: String, uriImage: Uri?) : LiveData<Boolean> {
         val mutableLiveData = MutableLiveData<Boolean>()
-        val userRemote = UserRemote()
+
 
         try {
+            val current = LocalDateTime.now()
 
-            val post = Post( user, text)
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+            val formatted = current.format(formatter)
+            val post = Post( user, text,"", formatted.toString())
             if( uriImage == null){
 
                 db_reference.push().setValue(post)
@@ -60,9 +66,6 @@ class PostRemote {
 
             }
 
-
-
-
             return mutableLiveData
 
         }catch (e :Exception){
@@ -80,14 +83,17 @@ class PostRemote {
         db_reference.get().addOnSuccessListener {
             //  Log.i("firebase", "Got value ${it.value}")
             var post : Post
-            Log.println(Log.ASSERT, "Error getting data", it.toString())
             for(item in it.children){
 
-                post = item.value as Post
-              posts.add(post)
+
+                post = item.getValue(Post::class.java)!!
+                posts.add(post)
 
             }
-            //Log.println(Log.ASSERT, "getting data", posts.toString())
+
+
+
+
 
             mutableLiveData.value = posts
 

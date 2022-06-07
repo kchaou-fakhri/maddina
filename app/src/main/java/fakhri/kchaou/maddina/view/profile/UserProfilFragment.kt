@@ -5,9 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.marginBottom
+import androidx.core.view.marginLeft
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
@@ -51,6 +54,31 @@ class UserProfilFragment : Fragment() {
 
             userVM.getUserById(id).observe(viewLifecycleOwner, Observer {
               binding.username.text = it.name
+                if (it.bio != ""){
+                    binding.bio.text = "( ${it.bio} )"
+                    val param = binding.bio.layoutParams as ViewGroup.MarginLayoutParams
+                    param.setMargins(0,0,0,8)
+                    binding.bio.layoutParams = param
+
+                }
+                else{
+                    binding.bio.text=""
+
+
+                }
+                if(it.job != ""){
+                    binding.jobTitle.setText(it.job)
+                }
+                else{
+                    binding.jobTitle.setText("لم يحدد بعد")
+                }
+                if (it.adress != ""){
+                    binding.adress.setText(it.adress)
+                }
+                else{
+                    binding.adress.setText("لم يحدد بعد")
+                }
+
 
             })
 

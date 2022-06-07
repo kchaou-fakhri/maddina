@@ -122,6 +122,19 @@
             app:layout_constraintTop_toBottomOf="@+id/profile_image"
             app:layout_constraintVertical_bias="0.0" />
 
+    <TextView
+        android:id="@+id/bio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/profile_image"
+        app:layout_constraintHorizontal_bias="0.794"
+        app:layout_constraintStart_toStartOf="@+id/profile_image"
+        app:layout_constraintTop_toBottomOf="@+id/username"
+        app:layout_constraintVertical_bias="0.0" />
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circleImageView2"
         android:layout_width="34dp"
@@ -138,27 +151,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" />
 
-        <TextView
-            android:id="@+id/job_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:drawableRight="@drawable/ic_work"
-            android:drawablePadding="10dp"
-            android:text="مطوير تطبيقات أندرويد"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:fontFamily="@font/cairo_light"
+    <TextView
+        android:id="@+id/job_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableRight="@drawable/ic_work"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/cairo_light"
+        android:text="مطوير تطبيقات أندرويد"
+        android:textColor="@color/black"
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/username"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/username"
-            app:layout_constraintVertical_bias="0.0" />
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/username"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bio"
+        app:layout_constraintVertical_bias="0.0" />
 
-        <TextView
-            android:id="@+id/home"
+    <TextView
+            android:id="@+id/adress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -188,10 +200,10 @@
         android:text="@string/create_post"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/home"
+        app:layout_constraintEnd_toEndOf="@+id/adress"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/home"
-        app:layout_constraintTop_toBottomOf="@+id/home" />
+        app:layout_constraintStart_toStartOf="@+id/adress"
+        app:layout_constraintTop_toBottomOf="@+id/adress" />
 
     <Button
         android:id="@+id/edit_profil"
@@ -215,7 +227,7 @@
     <Button
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_margin="10dp"
+        android:layout_marginRight="10dp"
 
         android:background="@drawable/shape_bkg"
         android:backgroundTint="@color/white"
@@ -224,9 +236,9 @@
         android:text="..."
         android:textColor="@color/primary_color"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/button2"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/home"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_profil"
+        app:layout_constraintEnd_toStartOf="@+id/edit_profil"
+        app:layout_constraintTop_toTopOf="@+id/edit_profil"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView

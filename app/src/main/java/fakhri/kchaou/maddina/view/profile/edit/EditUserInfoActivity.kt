@@ -35,8 +35,12 @@ class EditUserInfoActivity : AppCompatActivity() {
             alertDialog.dismissDialog()
 
             if (it != null){
-                binding.username.setText(it.name)
                 user = it
+
+                binding.username.setText(user.name)
+                binding.job.setText(user.job)
+                binding.location.setText(user.adress)
+                binding.bio.setText(user.bio)
 
             }
             else{

@@ -16,4 +16,5 @@
     <color name="error_color">#F44336</color>
     <color name="green_color">#019267</color>
     <color name="gray">#73747A</color>
+    <color name="gray_200">#398E8E93</color>
 </resources>

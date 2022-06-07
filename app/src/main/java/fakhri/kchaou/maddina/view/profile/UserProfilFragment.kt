@@ -2,23 +2,20 @@ package fakhri.kchaou.maddina.view.profile
 
 
 import android.content.Context
-import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import fakhri.kchaou.maddina.R
 import fakhri.kchaou.maddina.databinding.FragmentProfileBinding
 import fakhri.kchaou.maddina.model.entity.Post
-import fakhri.kchaou.maddina.view.home.HomeAdapter
 import fakhri.kchaou.maddina.view.home.HomeFragment
-import fakhri.kchaou.maddina.viewmodel.PostVM
+import fakhri.kchaou.maddina.view.profile.edit.EditProfilActivity
 import fakhri.kchaou.maddina.viewmodel.UserVM
 
 
@@ -58,6 +55,12 @@ class UserProfilFragment : Fragment() {
             })
 
 
+        binding.editProfil.setOnClickListener {
+            activity?.let{
+                val intent = Intent (it, EditProfilActivity::class.java)
+                it.startActivity(intent)
+            }
+        }
 
 
 

@@ -151,8 +151,26 @@ class UserRemote (){
          mutableLiveData.value = User(td.get("id"),td.get("name")!!,td.get("email")!!,"" , td.get("sex")!!)
         }.addOnFailureListener{
             Log.e("firebase", "Error getting data", it)
+            mutableLiveData.value = null
         }
 
+        return mutableLiveData
+    }
+
+
+
+    fun updateUser(user: User): LiveData<Message> {
+
+        var mutableLiveData = MutableLiveData<Message>()
+        val refDB = database.getReference("users")
+
+        refDB.child(user.id.toString()).setValue(user)
+            .addOnSuccessListener {
+              mutableLiveData.value = Message(true, "")
+            }
+            .addOnFailureListener {
+                mutableLiveData.value = Message(false, "")
+            }
         return mutableLiveData
     }
 

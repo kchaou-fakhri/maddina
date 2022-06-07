@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import fakhri.kchaou.maddina.R
 import fakhri.kchaou.maddina.databinding.FragmentHomeBinding
 import fakhri.kchaou.maddina.model.entity.Post
+import fakhri.kchaou.maddina.utils.AlertNoConnection
 import fakhri.kchaou.maddina.viewmodel.PostVM
 
 
@@ -49,17 +50,19 @@ class HomeFragment : Fragment() {
 
         postvm.getPost().observe(viewLifecycleOwner, Observer {
 //           posts.addAll(it)
+            if (it == null){
+                val alertNoConnection = AlertNoConnection(requireActivity())
+                alertNoConnection.startLoadingAlert()
+            }
 
 
+
+            else{
             val adapter = HomeAdapter(requireContext(),it )
             binding.rvPostList.layoutManager = LinearLayoutManager(requireContext())
             binding.rvPostList.adapter = adapter
 
-            for (item in it){
-                if (item.media_url == ""){
-                    it.remove(item)
-                }
-            }
+
             posts.clear()
             posts.add(Post())
 
@@ -67,12 +70,11 @@ class HomeFragment : Fragment() {
             /*********** remove the post contains only text ************/
             for (post in it){
 
-                if (post.media_url != null){
+                if (post.media_url?.length!! > 0){
                     posts.add(post)
 
                 }
             }
-
 
             val adapterStory = StoriesAdapter(requireContext(), posts)
             binding.stories.layoutManager = LinearLayoutManager(requireContext())
@@ -85,11 +87,15 @@ class HomeFragment : Fragment() {
             binding.stories.adapter = adapterStory
 
             alertDialog.dismiss()
+            }
         })
 
 
+
+
             return binding.root
+
+    }
     }
 
 
-}

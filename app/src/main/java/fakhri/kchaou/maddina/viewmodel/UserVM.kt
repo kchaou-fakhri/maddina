@@ -39,5 +39,9 @@ class UserVM() : ViewModel() {
         return userRepository.getUserById(id)
     }
 
+    fun updateUser(user: User) : LiveData<Message>{
+        return userRepository.updateUser(user)
+    }
+
 
 }

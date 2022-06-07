@@ -42,5 +42,9 @@ class UserRepository() {
         return userRemote.getUserById(id)
     }
 
+    fun updateUser(user: User): LiveData<Message> {
+        return userRemote.updateUser(user)
+    }
+
 
 }

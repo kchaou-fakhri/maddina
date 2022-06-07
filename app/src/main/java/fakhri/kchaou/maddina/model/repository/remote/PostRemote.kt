@@ -98,6 +98,7 @@ class PostRemote {
             mutableLiveData.value = posts
 
         }.addOnFailureListener{
+            mutableLiveData.value = null
             Log.e("firebase", "Error getting data", it)
         }
 

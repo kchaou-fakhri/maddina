@@ -143,7 +143,7 @@ class HomeAdapter(val context: Context, val posts: ArrayList<Post>):
                      8-> timeTxt = "منذ ثماني سنوات"
                      9-> timeTxt = "منذ تسع سنوات"
                      10-> timeTxt ="منذ عشرة سنوات"
-                     11-> timeTxt = "منذ $time سنوات "
+                     11-> timeTxt = " منذ $time سنوات "
 
 
                 }

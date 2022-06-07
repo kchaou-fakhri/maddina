@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_200"
+    tools:context=".view.profile.edit.EditProfilActivity">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/colorPrimary"
+                android:backgroundTint="@color/white"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_back"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arefruqaa"
+                android:text="@string/back"
+                android:textColor="@color/purple_200"
+                android:textSize="20sp"
+                app:icon="@drawable/ic_forward"
+                app:iconGravity="end"
+                app:iconTint="@color/purple_200"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/toolbar"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/toolbar"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.571" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@color/white"
+        android:fontFamily="@font/amiri_bold"
+        android:paddingRight="20dp"
+        android:text="الحساب"
+            android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:fontFamily="@font/amiri_bold"
+        android:paddingRight="20dp"
+        android:text="يرجى تحديث معلومات الحساب للحفاظ على أمن حسابك."
+        android:textColor="@color/gray"
+
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/edit_user_info"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center|right"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/ic_arrow_back"
+        android:drawableRight="@drawable/ic_person_circle"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/gray"
+        android:fontFamily="@font/amiri_regular"
+        android:paddingRight="20dp"
+        android:text="المعلومات الشخصية و معلومات الحساب"
+        android:textColor="@color/black"
+
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center|right"
+        android:layout_marginTop="2dp"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/ic_arrow_back"
+        android:drawableRight="@drawable/ic_verified_user"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/gray"
+        android:fontFamily="@font/amiri_regular"
+        android:paddingRight="20dp"
+
+        android:text="كلمة السر والأمان"
+        android:textColor="@color/black"
+
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_user_info" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        tools:ignore="Orientation" />
+
+
+    <TextView
+        android:id="@+id/favoris"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:fontFamily="@font/amiri_bold"
+        android:paddingRight="20dp"
+        android:text="التفضيلات"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+    <TextView
+        android:id="@+id/label_favoris"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:fontFamily="@font/amiri_bold"
+        android:paddingRight="20dp"
+        android:text="يمكنك تخصيص تجربتك على تطبيق مدينة"
+        android:textColor="@color/gray"
+
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/favoris" />
+
+    <TextView
+        android:id="@+id/news"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center|right"
+
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/ic_arrow_back"
+        android:drawableRight="@drawable/ic_circle_notifications"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/gray"
+        android:fontFamily="@font/amiri_regular"
+
+        android:paddingRight="20dp"
+        android:text="الاشعارات"
+
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_favoris" />
+
+    <TextView
+        android:id="@+id/language"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center|right"
+        android:layout_marginTop="2dp"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/ic_arrow_back"
+        android:drawableRight="@drawable/ic_language"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/gray"
+        android:fontFamily="@font/amiri_regular"
+        android:paddingRight="20dp"
+
+        android:text="اللغة"
+        android:textColor="@color/black"
+
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/news" />
+
+    <TextView
+        android:id="@+id/media"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center|right"
+        android:layout_marginTop="2dp"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/ic_arrow_back"
+        android:drawableRight="@drawable/ic_media"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/gray"
+        android:fontFamily="@font/amiri_regular"
+        android:paddingRight="20dp"
+
+        android:text="الوسائط"
+        android:textColor="@color/black"
+
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/language" />
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

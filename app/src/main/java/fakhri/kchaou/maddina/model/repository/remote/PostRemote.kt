@@ -87,6 +87,8 @@ class PostRemote {
 
 
                 post = item.getValue(Post::class.java)!!
+
+                post.id = item.key
                 posts.add(post)
 
             }
@@ -100,6 +102,22 @@ class PostRemote {
         }.addOnFailureListener{
             mutableLiveData.value = null
             Log.e("firebase", "Error getting data", it)
+        }
+
+        return mutableLiveData
+    }
+
+    fun getPostById(postID: String?): LiveData<Post> {
+        var mutableLiveData = MutableLiveData<Post>()
+
+        db_reference.child(postID!!).get().addOnSuccessListener {
+            //   Log.println(Log.ASSERT,"firebase--------------------------------------", "Got value ${it.getValue()}")
+            // val td: Map<String, String> = it.value as Map<String, String>
+
+            mutableLiveData.value = it.getValue(Post::class.java)
+        }.addOnFailureListener{
+            Log.e("firebase", "Error getting data", it)
+            mutableLiveData.value = null
         }
 
         return mutableLiveData

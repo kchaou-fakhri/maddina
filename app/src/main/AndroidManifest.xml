@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.maddina">
         <activity
+            android:name=".view.profile.Profil_Friend_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".view.post.PostItemActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.profile.edit.EditUserInfoActivity"
             android:exported="false" />
         <activity

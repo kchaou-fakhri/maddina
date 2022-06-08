@@ -26,5 +26,9 @@ class PostRepository() {
         return postRemote.getPost()
     }
 
+    fun getPostById(postID: String?): LiveData<Post> {
+        return postRemote.getPostById(postID)
+    }
+
 
 }

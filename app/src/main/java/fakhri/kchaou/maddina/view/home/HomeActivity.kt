@@ -46,7 +46,6 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent (this, CreatePostActivity::class.java)
             startActivity(intent)
 
-
         }
 
         bottomNavigation.add(MeowBottomNavigation.Model(1, R.drawable.ic_home))

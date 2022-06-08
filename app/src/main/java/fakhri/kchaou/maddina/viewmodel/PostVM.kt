@@ -20,7 +20,10 @@ class PostVM : ViewModel() {
        return postRepository.getPost()
     }
 
+    fun getPostById(postID: String?) : LiveData<Post> {
 
+        return postRepository.getPostById(postID)
+    }
 
 
 }

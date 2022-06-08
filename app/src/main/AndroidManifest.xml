@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.maddina">
         <activity
-            android:name=".view.profile.Profil_Friend_Activity"
+            android:name=".view.profile.ProfilFriendActivity"
             android:exported="false" />
         <activity
             android:name=".view.post.PostItemActivity"

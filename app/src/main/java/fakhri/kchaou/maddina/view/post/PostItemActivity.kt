@@ -14,8 +14,7 @@ import fakhri.kchaou.maddina.model.entity.User
 import fakhri.kchaou.maddina.utils.AlertNoConnection
 import fakhri.kchaou.maddina.utils.LoadingAlert
 import fakhri.kchaou.maddina.utils.convert
-import fakhri.kchaou.maddina.view.home.HomeActivity
-import fakhri.kchaou.maddina.view.profile.Profil_Friend_Activity
+import fakhri.kchaou.maddina.view.profile.ProfilFriendActivity
 import fakhri.kchaou.maddina.viewmodel.PostVM
 
 class PostItemActivity : AppCompatActivity() {
@@ -67,14 +66,14 @@ class PostItemActivity : AppCompatActivity() {
 
 
         binding.username.setOnClickListener {
-            val intent = Intent(this, Profil_Friend_Activity::class.java)
+            val intent = Intent(this, ProfilFriendActivity::class.java)
             intent.putExtra("friendId",user?.id);
             startActivity(intent)
             this.finish()
         }
 
         binding.profileImage.setOnClickListener {
-            val intent = Intent(this, Profil_Friend_Activity::class.java)
+            val intent = Intent(this, ProfilFriendActivity::class.java)
             intent.putExtra("friendId",user?.id);
             startActivity(intent)
             this.finish()

@@ -2,7 +2,6 @@ package fakhri.kchaou.maddina.view.home
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,14 +10,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import fakhri.kchaou.maddina.R
-import fakhri.kchaou.maddina.model.entity.Comment
 import fakhri.kchaou.maddina.model.entity.Post
 import fakhri.kchaou.maddina.utils.convert
 import fakhri.kchaou.maddina.view.post.PostItemActivity
-import fakhri.kchaou.maddina.view.profile.Profil_Friend_Activity
-import fakhri.kchaou.maddina.view.profile.edit.EditProfilActivity
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import fakhri.kchaou.maddina.view.profile.ProfilFriendActivity
 
 
 class HomeAdapter(val context: Context, val posts: ArrayList<Post>):
@@ -48,7 +43,7 @@ class HomeAdapter(val context: Context, val posts: ArrayList<Post>):
 
             itemView.findViewById<TextView>(R.id.username).setOnClickListener {
                 context?.let{
-                    val intent = Intent (it, Profil_Friend_Activity::class.java)
+                    val intent = Intent (it, ProfilFriendActivity::class.java)
                     intent.putExtra("friendId", data.user?.id );
                     it.startActivity(intent)
                 }
@@ -56,7 +51,7 @@ class HomeAdapter(val context: Context, val posts: ArrayList<Post>):
 
             itemView.findViewById<ImageView>(R.id.profile_image).setOnClickListener {
                 context?.let{
-                    val intent = Intent (it, Profil_Friend_Activity::class.java)
+                    val intent = Intent (it, ProfilFriendActivity::class.java)
                     intent.putExtra("friendId", data.user?.id );
                     it.startActivity(intent)
                 }

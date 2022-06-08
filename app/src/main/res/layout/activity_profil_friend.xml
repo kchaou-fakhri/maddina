@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     app:layout_constraintTop_toTopOf="parent"
 
-    tools:context=".view.profile.Profil_Friend_Activity">
+    tools:context=".view.profile.ProfilFriendActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
@@ -58,7 +58,7 @@
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@+id/toolbar"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.571" />
+                    app:layout_constraintVertical_bias="0.0" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -162,27 +162,27 @@
             app:layout_constraintVertical_bias="0.0" />
 
 
-        <Button
-            android:id="@+id/button"
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/add_friend"
             android:layout_width="180dp"
             android:layout_height="40dp"
             android:layout_margin="10dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/shape_bkg"
-            android:backgroundTint="@color/white"
-            android:fontFamily="@font/arefruqaa"
+            app:backgroundTint="@color/second_color"
+
+
+            android:fontFamily="@font/tajawal_regular"
+            app:iconGravity="end"
+            app:iconTint="@color/purple_200"
             android:text="متابعة"
-            android:drawableLeft="@drawable/ic_check_circle"
-            android:drawableTint="@color/green_color"
-            android:padding="10dp"
             android:textColor="@color/primary_color"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="@+id/adress"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/adress"
             app:layout_constraintTop_toBottomOf="@+id/adress" />
-
-
 
         <Button
             android:layout_width="40dp"
@@ -196,9 +196,9 @@
             android:text="..."
             android:textColor="@color/primary_color"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/button"
-            app:layout_constraintEnd_toStartOf="@+id/button"
-            app:layout_constraintTop_toTopOf="@+id/button"
+            app:layout_constraintBottom_toBottomOf="@+id/add_friend"
+            app:layout_constraintEnd_toStartOf="@+id/add_friend"
+            app:layout_constraintTop_toTopOf="@+id/add_friend"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -213,10 +213,10 @@
             android:textColor="@color/black"
             android:textSize="15sp"
             android:layout_marginBottom="5dp"
-            app:layout_constraintEnd_toEndOf="@+id/button"
+            app:layout_constraintEnd_toEndOf="@+id/add_friend"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button" />
+            app:layout_constraintTop_toBottomOf="@+id/add_friend" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rc_posts"

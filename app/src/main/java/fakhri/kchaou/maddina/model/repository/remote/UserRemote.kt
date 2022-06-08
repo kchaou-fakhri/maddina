@@ -8,6 +8,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import fakhri.kchaou.maddina.model.entity.Friend
 import fakhri.kchaou.maddina.model.entity.User
 import fakhri.kchaou.maddina.utils.Message
 

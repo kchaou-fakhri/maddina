@@ -2,8 +2,10 @@ package fakhri.kchaou.maddina.view.home
 
 
 import android.app.Activity
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -12,6 +14,7 @@ import androidx.core.content.ContextCompat
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import fakhri.kchaou.maddina.R
+import fakhri.kchaou.maddina.view.auth.LoginActivity
 import fakhri.kchaou.maddina.view.post.CreatePostActivity
 import fakhri.kchaou.maddina.view.profile.UserProfilFragment
 import fakhri.kchaou.maddina.viewmodel.UserVM
@@ -24,6 +27,8 @@ class HomeActivity : AppCompatActivity() {
     lateinit var userProfilFragment : UserProfilFragment
     lateinit var bottomNavigation : MeowBottomNavigation
     lateinit var createPostBtn : FloatingActionButton
+    var fragmenSelected : Int = 1
+
     companion object{
         var homeActivity: Activity? = null
     }
@@ -36,6 +41,20 @@ class HomeActivity : AppCompatActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.white))
         setContentView(R.layout.activity_home)
+
+
+
+        /************** this intent if start home activity from another activity ****************/
+        if(intent.extras != null){
+                      if(intent.extras!!.getString("fragment").equals("profile")){
+                fragmenSelected = 2  // to start profile fragment
+
+            }
+        }
+        /****************************************************************************************/
+
+
+
 
         homeActivity = this
         createPostBtn = findViewById(R.id.create_post)
@@ -53,7 +72,7 @@ class HomeActivity : AppCompatActivity() {
         bottomNavigation.add(MeowBottomNavigation.Model(3, R.drawable.ic_chat))
         bottomNavigation.add(MeowBottomNavigation.Model(4, R.drawable.ic_search))
 
-        bottomNavigation.show(1)
+        bottomNavigation.show(fragmenSelected)
 
 
         homeFragment = HomeFragment()
@@ -96,6 +115,10 @@ class HomeActivity : AppCompatActivity() {
                 3 -> {
                     val userVM = UserVM()
                     userVM.logout()
+                    val preferences = getSharedPreferences("user", 0)
+                    preferences.edit().remove("userId").commit()
+                    val intent = Intent (this, LoginActivity::class.java)
+                    startActivity(intent)
                     this.finish()
                 }
 

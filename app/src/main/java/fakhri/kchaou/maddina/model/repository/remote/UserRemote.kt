@@ -11,6 +11,7 @@ import com.google.firebase.ktx.Firebase
 import fakhri.kchaou.maddina.model.entity.Friend
 import fakhri.kchaou.maddina.model.entity.User
 import fakhri.kchaou.maddina.utils.Message
+import java.util.*
 
 class UserRemote (){
     private val database = Firebase.database
@@ -79,7 +80,7 @@ class UserRemote (){
 
                     } else {
                         val  msg = task.exception.toString()
-                        //Log.println(Log.ASSERT, ContentValues.TAG, msg.length.toString())
+
                         if(msg.length.equals(116)){
                             message = Message(false, "الحساب موجود بالفعل ")
                             mutableLiveData.value = message
@@ -147,10 +148,13 @@ class UserRemote (){
         var mutableLiveData = MutableLiveData<User>()
 
         db_reference.child(id).get().addOnSuccessListener {
-         //   Log.println(Log.ASSERT,"firebase--------------------------------------", "Got value ${it.getValue()}")
-           // val td: Map<String, String> = it.value as Map<String, String>
+           //Log.println(Log.ASSERT,"firebase--------------------------------------", "Got value ${it.value}")
+           val td: Map<String, Objects> = it.value as Map<String, Objects>
 
          mutableLiveData.value = it.getValue(User::class.java)
+           // mutableLiveData.value?.relations = td.get("relation") as MutableList<Friend>
+
+
         }.addOnFailureListener{
             Log.e("firebase", "Error getting data", it)
             mutableLiveData.value = null
@@ -174,6 +178,38 @@ class UserRemote (){
                 mutableLiveData.value = Message(false, "")
             }
         return mutableLiveData
+    }
+
+    fun addFriend(user: User, id: String): LiveData<Message> {
+        var mutableLiveData = MutableLiveData<Message>()
+        val refDB = database.getReference("users")
+
+        refDB.child(user.id.toString()).child("relation").setValue(user.relations)
+
+            refDB.child(id.toString()).child("relation").setValue(getSender(id, user))
+            .addOnSuccessListener {
+                mutableLiveData.value = Message(true, "yemchi")
+            }
+            .addOnFailureListener {
+                mutableLiveData.value = Message(false, "laaaaaaaaaaaa")
+            }
+        return mutableLiveData
+    }
+
+    private fun getSender(id : String, user: User): MutableList<Friend>? {
+
+       var i=0
+        if (i in 0..user.relations!!.size) { // equivalent of 1 <= i && i <= 4
+            if (user.relations!!.get(i).id.equals(id)){
+                user.relations!!.get(i).id = user.id
+                user.relations!!.get(i).state = "+follower"
+
+
+            }
+        }
+
+        return user.relations
+
     }
 
 }

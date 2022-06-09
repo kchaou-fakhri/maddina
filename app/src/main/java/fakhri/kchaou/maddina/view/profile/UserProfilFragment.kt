@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.marginBottom
 import androidx.core.view.marginLeft
 import androidx.fragment.app.Fragment
@@ -17,6 +18,7 @@ import androidx.lifecycle.Observer
 import fakhri.kchaou.maddina.R
 import fakhri.kchaou.maddina.databinding.FragmentProfileBinding
 import fakhri.kchaou.maddina.model.entity.Post
+import fakhri.kchaou.maddina.view.home.HomeActivity
 import fakhri.kchaou.maddina.view.home.HomeFragment
 import fakhri.kchaou.maddina.view.profile.edit.EditProfilActivity
 import fakhri.kchaou.maddina.viewmodel.UserVM

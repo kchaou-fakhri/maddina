@@ -2,6 +2,7 @@ package fakhri.kchaou.maddina.view.home
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,8 @@ class HomeAdapter(val context: Context, val posts: ArrayList<Post>):
 
 
         fun bindView(data : Post){
+            val sharedPreferences: SharedPreferences = context.getSharedPreferences("user", Context.MODE_PRIVATE)
+            val id = sharedPreferences.getString("userId", "")!!
 
             itemView.findViewById<TextView>(R.id.created_at).text = convert(data.created_at!!)
             itemView.findViewById<TextView>(R.id.post_text).text = data.text
@@ -34,26 +37,59 @@ class HomeAdapter(val context: Context, val posts: ArrayList<Post>):
                     .into(itemView.findViewById<ImageView>(R.id.post_img))
 
             itemView.setOnClickListener {
+
+
+            }
+
+            itemView.setOnClickListener{
                 context?.let{
                     val intent = Intent (it, PostItemActivity::class.java)
-                    intent.putExtra("postId", data.id );
+                    intent.putExtra("postId", data.id);
                     it.startActivity(intent)
                 }
             }
 
             itemView.findViewById<TextView>(R.id.username).setOnClickListener {
-                context?.let{
-                    val intent = Intent (it, ProfilFriendActivity::class.java)
-                    intent.putExtra("friendId", data.user?.id );
-                    it.startActivity(intent)
+
+                if(!data.user?.id.equals(id)) {
+
+                    context?.let{
+                        val intent = Intent (it, ProfilFriendActivity::class.java)
+                        intent.putExtra("friendId", data.user?.id);
+                        it.startActivity(intent)
+                    }
                 }
+                else{
+                    context?.let{
+                        HomeActivity.homeActivity?.finish()
+                        val intent = Intent (it, HomeActivity::class.java)
+                        intent.putExtra("fragment", "profile");
+                        it.startActivity(intent)
+
+                    }
+
+                }
+
             }
 
             itemView.findViewById<ImageView>(R.id.profile_image).setOnClickListener {
-                context?.let{
-                    val intent = Intent (it, ProfilFriendActivity::class.java)
-                    intent.putExtra("friendId", data.user?.id );
-                    it.startActivity(intent)
+                if(!data.user?.id.equals(id)) {
+
+                    context?.let{
+                        val intent = Intent (it, ProfilFriendActivity::class.java)
+                        intent.putExtra("friendId", data.user?.id);
+                        it.startActivity(intent)
+                    }
+                }
+                else{
+                    context?.let{
+                        HomeActivity.homeActivity?.finish()
+                        val intent = Intent (it, HomeActivity::class.java)
+                        intent.putExtra("fragment", "profile");
+                        it.startActivity(intent)
+
+                    }
+
                 }
             }
 

@@ -165,8 +165,10 @@
         <com.google.android.material.button.MaterialButton
             style="@style/Widget.AppCompat.Button.Borderless"
             android:id="@+id/add_friend"
-            android:layout_width="180dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:paddingRight="25dp"
+            android:paddingLeft="25dp"
             android:layout_margin="10dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/shape_bkg"

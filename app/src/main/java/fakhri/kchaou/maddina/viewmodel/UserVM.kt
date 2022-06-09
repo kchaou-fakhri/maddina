@@ -2,6 +2,7 @@ package fakhri.kchaou.maddina.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import fakhri.kchaou.maddina.model.entity.Friend
 import fakhri.kchaou.maddina.model.entity.User
 import fakhri.kchaou.maddina.model.repository.UserRepository
 import fakhri.kchaou.maddina.utils.Message
@@ -17,7 +18,7 @@ class UserVM() : ViewModel() {
 
 
     fun addUser(name : String,email :String, password :String , sex: String) : LiveData<Message>{
-        val user = User(null,name,email, password, sex)
+        val user = User(null,name,email, password, sex, "", "","",ArrayList<Friend>())
         return userRepository.add(user)
     }
 
@@ -41,6 +42,10 @@ class UserVM() : ViewModel() {
 
     fun updateUser(user: User) : LiveData<Message>{
         return userRepository.updateUser(user)
+    }
+
+    fun addFriend(user: User, id: String) : LiveData<Message>{
+        return userRepository.addFriend(user, id)
     }
 
 

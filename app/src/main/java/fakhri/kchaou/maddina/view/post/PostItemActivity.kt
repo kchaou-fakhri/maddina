@@ -1,6 +1,8 @@
 package fakhri.kchaou.maddina.view.post
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -10,10 +12,12 @@ import com.bumptech.glide.Glide
 import fakhri.kchaou.maddina.R
 import fakhri.kchaou.maddina.databinding.ActivityPostItemBinding
 import fakhri.kchaou.maddina.model.entity.Comment
+import fakhri.kchaou.maddina.model.entity.Post
 import fakhri.kchaou.maddina.model.entity.User
 import fakhri.kchaou.maddina.utils.AlertNoConnection
 import fakhri.kchaou.maddina.utils.LoadingAlert
 import fakhri.kchaou.maddina.utils.convert
+import fakhri.kchaou.maddina.view.home.HomeActivity
 import fakhri.kchaou.maddina.view.profile.ProfilFriendActivity
 import fakhri.kchaou.maddina.viewmodel.PostVM
 
@@ -21,7 +25,8 @@ class PostItemActivity : AppCompatActivity() {
 
     lateinit var binding : ActivityPostItemBinding
     lateinit var postVM: PostVM
-    lateinit var user : User
+
+    lateinit var post : Post
 
 
 
@@ -31,6 +36,10 @@ class PostItemActivity : AppCompatActivity() {
         val view =  binding.root
         setContentView(view)
 
+        val sharedPreferences: SharedPreferences? = this.getSharedPreferences("user", Context.MODE_PRIVATE)
+        val userId :String = sharedPreferences?.getString("userId", "").toString()
+
+
         postVM = PostVM()
         val loadingAlert = LoadingAlert(this)
         loadingAlert.startLoadingAlert()
@@ -38,15 +47,15 @@ class PostItemActivity : AppCompatActivity() {
 
         postVM.getPostById(postID).observe(this, Observer {
             if (it!= null) {
-                user = it.user!!
+
+                post = it
                 binding.postText.text = it.text
+                binding.username.text = it.user?.name
                 binding.createdAt.text = convert(it.created_at!!)
                 Glide.with(this /* context */)
                     .load(it.media_url)
                     .into(findViewById<ImageView>(R.id.post_img))
                 loadingAlert.dismissDialog()
-
-
             }
 
             else{
@@ -66,17 +75,34 @@ class PostItemActivity : AppCompatActivity() {
 
 
         binding.username.setOnClickListener {
-            val intent = Intent(this, ProfilFriendActivity::class.java)
-            intent.putExtra("friendId",user?.id);
-            startActivity(intent)
-            this.finish()
+            if(!post.user?.id.equals(userId)) {
+
+                val intent = Intent(this, ProfilFriendActivity::class.java)
+                intent.putExtra("friendId", post.user?.id);
+                startActivity(intent)
+            }
+            else{
+                HomeActivity.homeActivity?.finish()
+                val intent = Intent(this, HomeActivity::class.java)
+                intent.putExtra("fragment", "profile");
+                startActivity(intent)
+                this.finish()
+            }
         }
 
         binding.profileImage.setOnClickListener {
-            val intent = Intent(this, ProfilFriendActivity::class.java)
-            intent.putExtra("friendId",user?.id);
-            startActivity(intent)
-            this.finish()
+            if(!post.user?.id.equals(userId)) {
+
+                val intent = Intent(this, ProfilFriendActivity::class.java)
+                intent.putExtra("friendId", post.user?.id);
+                startActivity(intent)
+            }
+            else{
+                val intent = Intent(this, HomeActivity::class.java)
+                intent.putExtra("fragment", "profile");
+                startActivity(intent)
+                this.finish()
+            }
         }
     }
 }

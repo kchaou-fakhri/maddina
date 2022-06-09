@@ -84,8 +84,6 @@ class PostRemote {
             //  Log.i("firebase", "Got value ${it.value}")
             var post : Post
             for(item in it.children){
-
-
                 post = item.getValue(Post::class.java)!!
 
                 post.id = item.key

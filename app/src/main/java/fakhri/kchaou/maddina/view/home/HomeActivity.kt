@@ -14,7 +14,9 @@ import androidx.core.content.ContextCompat
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import fakhri.kchaou.maddina.R
+import fakhri.kchaou.maddina.databinding.FragmentListFriendBinding
 import fakhri.kchaou.maddina.view.auth.LoginActivity
+import fakhri.kchaou.maddina.view.friend.ListFriendFragment
 import fakhri.kchaou.maddina.view.post.CreatePostActivity
 import fakhri.kchaou.maddina.view.profile.UserProfilFragment
 import fakhri.kchaou.maddina.viewmodel.UserVM
@@ -25,6 +27,7 @@ class HomeActivity : AppCompatActivity() {
 
     lateinit var homeFragment : HomeFragment
     lateinit var userProfilFragment : UserProfilFragment
+    lateinit var listFriendFragment: ListFriendFragment
     lateinit var bottomNavigation : MeowBottomNavigation
     lateinit var createPostBtn : FloatingActionButton
     var fragmenSelected : Int = 1
@@ -69,14 +72,16 @@ class HomeActivity : AppCompatActivity() {
 
         bottomNavigation.add(MeowBottomNavigation.Model(1, R.drawable.ic_home))
         bottomNavigation.add(MeowBottomNavigation.Model(2, R.drawable.ic_user))
-        bottomNavigation.add(MeowBottomNavigation.Model(3, R.drawable.ic_chat))
-        bottomNavigation.add(MeowBottomNavigation.Model(4, R.drawable.ic_search))
+        bottomNavigation.add(MeowBottomNavigation.Model(3, R.drawable.send))
+        bottomNavigation.add(MeowBottomNavigation.Model(4, R.drawable.ic_contact))
+        bottomNavigation.add(MeowBottomNavigation.Model(5, R.drawable.ic_search))
 
         bottomNavigation.show(fragmenSelected)
 
 
         homeFragment = HomeFragment()
         userProfilFragment = UserProfilFragment()
+        listFriendFragment = ListFriendFragment()
 
 
 
@@ -123,7 +128,13 @@ class HomeActivity : AppCompatActivity() {
                 }
 
                 4 -> {
+                    supportFragmentManager.beginTransaction().apply {
+                        replace(R.id.home_fragment, listFriendFragment)
+                        commit()
+                    }
+            }
 
+                5-> {
             }
 
             }

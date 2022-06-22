@@ -27,7 +27,7 @@ class UserRepository() {
         userRemote.logout()
     }
 
-    fun getUserById(id: String): LiveData<User> {
+    fun getUserById (id: String): LiveData<User> {
         return userRemote.getUserById(id)
     }
 
@@ -37,6 +37,15 @@ class UserRepository() {
 
     fun addFriend(user: User, id: String): LiveData<Message> {
         return userRemote.addFriend(user, id)
+    }
+
+    fun getFriends(id: String): LiveData<ArrayList<User>> {
+
+        return userRemote.getFrineds(id)
+    }
+
+    fun acceptedFriend(user: User, id: String): LiveData<Message> {
+        return userRemote.acceptedFriend(user, id)
     }
 
 

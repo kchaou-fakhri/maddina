@@ -1,21 +1,21 @@
 package fakhri.kchaou.maddina.model.repository.remote
 
+import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import fakhri.kchaou.maddina.model.entity.Friend
 import fakhri.kchaou.maddina.model.entity.User
 import fakhri.kchaou.maddina.utils.Message
 import java.util.*
 
-class UserRemote (){
-    private val database = Firebase.database
-    private val db_reference = database.getReference("users")
+class  UserRemote  (){
+
     private lateinit var auth: FirebaseAuth
 
     init {
@@ -26,14 +26,14 @@ class UserRemote (){
 
 
 
-
     fun insertTORealTimeDataBase(user: User){
 
         user.password =""
+        val db = Firebase.firestore
 
-        val refDB = database.getReference("users")
 
-        refDB.child(user.id.toString()).setValue(user)
+        db.collection("users").document(user.id!!)
+            .set(user)
 
     }
 
@@ -146,19 +146,24 @@ class UserRemote (){
 
     fun getUserById(id: String) : LiveData<User>{
         var mutableLiveData = MutableLiveData<User>()
+        var users = ArrayList<User>()
+        val db = Firebase.firestore
+        db.collection("users").document(id)
+            .get()
+            .addOnSuccessListener {
 
-        db_reference.child(id).get().addOnSuccessListener {
-           //Log.println(Log.ASSERT,"firebase--------------------------------------", "Got value ${it.value}")
-           val td: Map<String, Objects> = it.value as Map<String, Objects>
+                    document ->
+                if (document != null) {
+                    mutableLiveData.value = document.toObject(User::class.java)
+                } else {
+                    Log.d(TAG, "No such document")
+                }
 
-         mutableLiveData.value = it.getValue(User::class.java)
-           // mutableLiveData.value?.relations = td.get("relation") as MutableList<Friend>
 
-
-        }.addOnFailureListener{
-            Log.e("firebase", "Error getting data", it)
-            mutableLiveData.value = null
-        }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents.", exception)
+            }
 
         return mutableLiveData
     }
@@ -168,9 +173,9 @@ class UserRemote (){
     fun updateUser(user: User): LiveData<Message> {
 
         var mutableLiveData = MutableLiveData<Message>()
-        val refDB = database.getReference("users")
-
-        refDB.child(user.id.toString()).setValue(user)
+        val db = Firebase.firestore
+        db.collection("users").document(user.id!!)
+            .set(user)
             .addOnSuccessListener {
               mutableLiveData.value = Message(true, "")
             }
@@ -180,13 +185,18 @@ class UserRemote (){
         return mutableLiveData
     }
 
+
+
     fun addFriend(user: User, id: String): LiveData<Message> {
         var mutableLiveData = MutableLiveData<Message>()
-        val refDB = database.getReference("users")
+        val db = Firebase.firestore
+        db.collection("users").document(user.id!!).update(mapOf(
+            "relations" to user.relations,
+        ))
 
-        refDB.child(user.id.toString()).child("relation").setValue(user.relations)
-
-            refDB.child(id.toString()).child("relation").setValue(getSender(id, user))
+        db.collection("users").document(id!!).update(mapOf(
+            "relations" to getSender(id, user),
+        ))
             .addOnSuccessListener {
                 mutableLiveData.value = Message(true, "yemchi")
             }
@@ -196,20 +206,102 @@ class UserRemote (){
         return mutableLiveData
     }
 
+
+
+
+
+
+
+
+    fun getFrineds(id: String): LiveData<ArrayList<User>> {
+
+
+        var mutableLiveData = MutableLiveData<ArrayList<User>>()
+        val db = Firebase.firestore
+
+
+        var idUsers = ArrayList<String>()
+        db.collection("users").document(id).get().addOnSuccessListener {
+
+
+
+            it.toObject(User::class.java)?.relations?.forEach {
+                if (it.state.equals("+follower")){
+                    idUsers.add(it.id!!)
+                }
+            }
+            if (idUsers.isNotEmpty()){
+
+
+
+            db.collection("users").whereIn("id", idUsers).get()
+                .addOnSuccessListener {
+
+                    var relations = ArrayList<User>()
+
+
+
+                    for (item in it.documents) {
+
+                        relations.add(item.toObject(User::class.java)!!)
+                    }
+                    mutableLiveData.value = relations
+                }
+        }
+
+        }
+        return mutableLiveData
+    }
+
+    fun acceptedFriend(user: User, id: String): LiveData<Message> {
+
+        var mutableLiveData = MutableLiveData<Message>()
+        val db = Firebase.firestore
+        db.collection("users").document(user.id!!)
+            .update(mapOf( "relations" to user.relations))
+
+//            ).update(mapOf(
+//            "relations" to user.relations,
+//        ))
+
+        db.collection("users").document(id!!).update(mapOf(
+            "relations" to getAccepted(id, user),
+        ))
+            .addOnSuccessListener {
+                mutableLiveData.value = Message(true, "yemchi")
+            }
+            .addOnFailureListener {
+                mutableLiveData.value = Message(false, "laaaaaaaaaaaa")
+            }
+        return mutableLiveData
+    }
+
+    private  fun getAccepted(id: String, user: User): MutableList<Friend>? {
+
+        var i = 0
+        if (i in 0..user.relations!!.size) {
+            if (user.relations!!.get(i)?.id.equals(id)) {
+                user.relations!!.get(i)?.id = user.id
+                user.relations!!.get(i).state = "friend"
+            }
+        }
+
+        return user.relations
+    }
     private fun getSender(id : String, user: User): MutableList<Friend>? {
 
-       var i=0
-        if (i in 0..user.relations!!.size) { // equivalent of 1 <= i && i <= 4
-            if (user.relations!!.get(i).id.equals(id)){
-                user.relations!!.get(i).id = user.id
+        var i=0
+        if (i in 0..user.relations!!.size) {
+            if (user.relations!!.get(i)?.id.equals(id)){
+                user.relations!!.get(i)?.id = user.id
                 user.relations!!.get(i).state = "+follower"
-
-
             }
         }
 
         return user.relations
 
     }
+
+
 
 }

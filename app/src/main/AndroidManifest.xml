@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.maddina">
         <activity
+            android:name=".ListRequestFriendActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.profile.ProfilFriendActivity"
             android:exported="false" />
         <activity

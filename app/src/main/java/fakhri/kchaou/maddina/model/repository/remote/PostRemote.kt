@@ -7,6 +7,8 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.ktx.database
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import fakhri.kchaou.maddina.model.entity.Post
@@ -17,9 +19,8 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class PostRemote {
+    val db = Firebase.firestore
 
-    private val database = Firebase.database
-    private val db_reference = database.getReference("posts")
     private val storage_referance = FirebaseStorage.getInstance().getReference()
 
 
@@ -36,7 +37,9 @@ class PostRemote {
             val post = Post( user, text,"", formatted.toString())
             if( uriImage == null){
 
-                db_reference.push().setValue(post)
+                db.collection("posts").document()
+                    .set(post)
+
                 mutableLiveData.value = true
             }
             else {
@@ -57,7 +60,9 @@ class PostRemote {
                     if (task.isSuccessful) {
                         var downloadUri = task.result
                         post.media_url = downloadUri.toString()
-                        db_reference.push().setValue(post)
+
+                        db.collection("posts").document().set(post)
+
                         mutableLiveData.value = true
 
                     }
@@ -79,25 +84,29 @@ class PostRemote {
     fun getPost() : LiveData<ArrayList<Post>> {
         val mutableLiveData = MutableLiveData<ArrayList<Post>>()
         var posts = ArrayList<Post>()
-
-        db_reference.get().addOnSuccessListener {
+        db.collection("posts")
+            .get()
+            .addOnSuccessListener {  documents ->
             //  Log.i("firebase", "Got value ${it.value}")
             var post : Post
-            for(item in it.children){
-                post = item.getValue(Post::class.java)!!
 
-                post.id = item.key
-                posts.add(post)
+                for (document in documents) {
+                    post = document.toObject(Post::class.java)!!
 
+                    post.id = document.id
+                    posts.add(post)
+                }
+
+                mutableLiveData.value = posts
             }
 
 
 
 
 
-            mutableLiveData.value = posts
 
-        }.addOnFailureListener{
+
+        .addOnFailureListener{
             mutableLiveData.value = null
             Log.e("firebase", "Error getting data", it)
         }
@@ -107,12 +116,13 @@ class PostRemote {
 
     fun getPostById(postID: String?): LiveData<Post> {
         var mutableLiveData = MutableLiveData<Post>()
-
-        db_reference.child(postID!!).get().addOnSuccessListener {
+        db.collection("posts").document(postID!!)
+            .get()
+            .addOnSuccessListener {
             //   Log.println(Log.ASSERT,"firebase--------------------------------------", "Got value ${it.getValue()}")
             // val td: Map<String, String> = it.value as Map<String, String>
 
-            mutableLiveData.value = it.getValue(Post::class.java)
+            mutableLiveData.value = it.toObject(Post::class.java)
         }.addOnFailureListener{
             Log.e("firebase", "Error getting data", it)
             mutableLiveData.value = null

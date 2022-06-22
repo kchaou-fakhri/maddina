@@ -40,13 +40,27 @@ class ProfilFriendActivity : AppCompatActivity() {
                 if (checkRelation(user, friendId!!) =="user"){
                     binding.addFriend.setIconResource(R.drawable.ic_access_time)
                     binding.addFriend.text  ="تم ارسال الدعوة"
-                    user.relations!!.add(Friend(friendId, "-follower"))
+                    user.relations?.add(Friend(friendId, "-follower"))
 
-                    userVM.addFriend(user, friendId).observe(this, Observer {
-
+                    userVM.addFriend(user, friend.id!!).observe(this, Observer {
+                        Log.println(Log.ASSERT, "-----------",checkRelation(user, friendId!!) )
                     })
 
                 }
+
+                if(checkRelation(user, friendId!!) =="+follower"){
+                    binding.addFriend.setIconResource(R.drawable.ic_hand)
+                    binding.addFriend.text  ="صديق"
+                    user.relations?.remove(Friend(friendId, "+follower"))
+                    user.relations?.add(Friend(friendId, "friend"))
+
+                    userVM.acceptedFriend(user, friend.id!!).observe(this, Observer {
+                        Log.println(Log.ASSERT, "-----------",checkRelation(user, friendId!!) )
+                    })
+                    Log.println(Log.ASSERT, "-----------",checkRelation(user, friendId!!) )
+
+
+        }
 
 
 
@@ -55,6 +69,32 @@ class ProfilFriendActivity : AppCompatActivity() {
 
         userVM.getUserById(id).observe(this, Observer {
             user = it
+            if (it.relations != null){
+                for (item in it.relations!!) {
+                    if (item.id.equals(friendId)) {
+
+                        if (item.state.equals("-follower")) {
+                            binding.addFriend.setIconResource(R.drawable.ic_access_time)
+                            binding.addFriend.text = "تم ارسال الدعوة"
+
+                        }
+                        if (item.state.equals("+follower")) {
+                            binding.addFriend.setIconResource(R.drawable.ic_access_time)
+                            binding.addFriend.text = "تواصل"
+                            binding.more.text = "إلغاء"
+                            binding.more.layoutParams.width = 200
+
+                        }
+                        if (item.state == "friend") {
+                            binding.addFriend.setIconResource(R.drawable.ic_hand)
+                            binding.addFriend.text = "أصدقاء"
+                        }
+                        break
+                    }
+
+                }
+            }
+
             //Log.println(Log.ASSERT,"firebase--------------------------------------", "Got value ${it.relations}")
 
         })
@@ -86,24 +126,11 @@ class ProfilFriendActivity : AppCompatActivity() {
             else{
                 binding.adress.setText("لم يحدد بعد")
             }
+        if(it.relations != null) {
 
 
-            for (item in it.relations!!){
-              if (item.id.equals(friendId)){
 
-                   if (item.state == "follower"){
-                       binding.addFriend.setIconResource(R.drawable.ic_access_time)
-                       binding.addFriend.text ="تم ارسال الدعوة"
-
-                  }
-                  if (item.state == "friend"){
-                      binding.addFriend.setIconResource(R.drawable.ic_check_circle)
-                      binding.addFriend.text ="أصدقاء"
-                  }
-                  break
-              }
-
-          }
+            }
         })
 
 
@@ -112,11 +139,14 @@ class ProfilFriendActivity : AppCompatActivity() {
 
     fun checkRelation(user : User, id: String): String{
         var state = "user"
-        for (item in user.relations!!){
-            if (item.id.equals(id)){
-                state = item.state.toString()
+        if(user.relations != null){
+            for (item in user.relations!!){
+                if (item?.id.equals(id)){
+                    state = item.state.toString()
+                }
             }
         }
+
         return state
     }
 }

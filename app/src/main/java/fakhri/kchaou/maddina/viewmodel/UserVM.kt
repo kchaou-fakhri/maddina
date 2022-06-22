@@ -48,5 +48,13 @@ class UserVM() : ViewModel() {
         return userRepository.addFriend(user, id)
     }
 
+    fun getfriends(id: String): LiveData<ArrayList<User>> {
+        return userRepository.getFriends(id)
+    }
+
+    fun acceptedFriend(user: User, id: String): LiveData<Message> {
+        return userRepository.acceptedFriend(user, id)
+    }
+
 
 }

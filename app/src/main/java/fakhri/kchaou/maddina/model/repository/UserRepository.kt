@@ -35,8 +35,8 @@ class UserRepository() {
         return userRemote.updateUser(user)
     }
 
-    fun addFriend(user: User, id: String): LiveData<Message> {
-        return userRemote.addFriend(user, id)
+    fun addFriend(user: User, friend: User): LiveData<Message> {
+        return userRemote.addFriend(user, friend)
     }
 
     fun getFriends(id: String): LiveData<ArrayList<User>> {
@@ -44,8 +44,8 @@ class UserRepository() {
         return userRemote.getFrineds(id)
     }
 
-    fun acceptedFriend(user: User, id: String): LiveData<Message> {
-        return userRemote.acceptedFriend(user, id)
+    fun acceptedFriend(user: User, friend: User): LiveData<Message> {
+        return userRemote.acceptedFriend(user, friend)
     }
 
 

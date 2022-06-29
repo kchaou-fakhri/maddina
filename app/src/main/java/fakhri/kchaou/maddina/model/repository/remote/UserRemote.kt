@@ -13,6 +13,7 @@ import fakhri.kchaou.maddina.model.entity.Friend
 import fakhri.kchaou.maddina.model.entity.User
 import fakhri.kchaou.maddina.utils.Message
 import java.util.*
+import kotlin.collections.ArrayList
 
 class  UserRemote  (){
 
@@ -187,15 +188,15 @@ class  UserRemote  (){
 
 
 
-    fun addFriend(user: User, id: String): LiveData<Message> {
+    fun addFriend(user: User, friend: User): LiveData<Message> {
         var mutableLiveData = MutableLiveData<Message>()
         val db = Firebase.firestore
         db.collection("users").document(user.id!!).update(mapOf(
             "relations" to user.relations,
         ))
 
-        db.collection("users").document(id!!).update(mapOf(
-            "relations" to getSender(id, user),
+        db.collection("users").document(friend.id!!).update(mapOf(
+            "relations" to friend.relations,
         ))
             .addOnSuccessListener {
                 mutableLiveData.value = Message(true, "yemchi")
@@ -253,19 +254,16 @@ class  UserRemote  (){
         return mutableLiveData
     }
 
-    fun acceptedFriend(user: User, id: String): LiveData<Message> {
+    fun acceptedFriend(user: User, friend: User): LiveData<Message> {
 
         var mutableLiveData = MutableLiveData<Message>()
         val db = Firebase.firestore
         db.collection("users").document(user.id!!)
             .update(mapOf( "relations" to user.relations))
 
-//            ).update(mapOf(
-//            "relations" to user.relations,
-//        ))
 
-        db.collection("users").document(id!!).update(mapOf(
-            "relations" to getAccepted(id, user),
+        db.collection("users").document(friend.id!!).update(mapOf(
+            "relations" to friend.relations,
         ))
             .addOnSuccessListener {
                 mutableLiveData.value = Message(true, "yemchi")
@@ -274,6 +272,12 @@ class  UserRemote  (){
                 mutableLiveData.value = Message(false, "laaaaaaaaaaaa")
             }
         return mutableLiveData
+    }
+
+    fun addPostIDtoUser(user: User){
+        val db = Firebase.firestore
+        db.collection("users").document(user.id!!)
+            .update(mapOf( "posts" to user.posts))
     }
 
     private  fun getAccepted(id: String, user: User): MutableList<Friend>? {
@@ -301,6 +305,9 @@ class  UserRemote  (){
         return user.relations
 
     }
+
+
+
 
 
 

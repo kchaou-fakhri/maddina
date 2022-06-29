@@ -1,4 +1,4 @@
-package fakhri.kchaou.maddina.view.friend
+package fakhri.kchaou.maddina.view.search
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -13,9 +13,10 @@ import com.google.android.material.snackbar.Snackbar
 import fakhri.kchaou.maddina.R
 import fakhri.kchaou.maddina.model.entity.Friend
 import fakhri.kchaou.maddina.model.entity.User
+import fakhri.kchaou.maddina.view.friend.ListFriendAdapter
 import fakhri.kchaou.maddina.viewmodel.UserVM
 
-class ListFriendAdapter(val context : Context, val friends: ArrayList<User>) : RecyclerView.Adapter<ListFriendAdapter.ViewHolder>() {
+class SearchAdapter(val context : Context, val friends: ArrayList<User>) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -34,7 +35,7 @@ class ListFriendAdapter(val context : Context, val friends: ArrayList<User>) : R
 
                 userVM.getUserById(id).observe(lifecycleOwner!!,Observer {
                     var friend = data
-                   it.relations?.remove(Friend(data.id, "+follower"))
+                    it.relations?.remove(Friend(data.id, "+follower"))
                     it.relations?.add(Friend(data.id, "friend"))
 
                     friend.relations?.remove(Friend(it.id, "-follower"))
@@ -64,7 +65,7 @@ class ListFriendAdapter(val context : Context, val friends: ArrayList<User>) : R
 
 
 
-                userVM.getUserById(id).observe(lifecycleOwner!!,Observer {
+                userVM.getUserById(id).observe(lifecycleOwner!!, Observer {
                     var friend = data
                     it.relations?.remove(Friend(data.id, "+follower"))
 
@@ -98,15 +99,15 @@ class ListFriendAdapter(val context : Context, val friends: ArrayList<User>) : R
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.friend_request_item, parent, false))
+        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.search_item, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-      holder.bindView(friends.get(position))
+        holder.bindView(friends.get(position))
     }
 
     override fun getItemCount(): Int {
-      return friends.size
+        return friends.size
     }
 
     fun deleteItem(index: Int){

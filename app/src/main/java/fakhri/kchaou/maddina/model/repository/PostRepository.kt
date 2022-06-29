@@ -2,7 +2,9 @@ package fakhri.kchaou.maddina.model.repository
 
 
 import android.net.Uri
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.ktx.database
@@ -18,12 +20,13 @@ import kotlin.collections.ArrayList
 class PostRepository() {
      var  postRemote: PostRemote = PostRemote()
 
+
     fun createPost(user: User, text: String, uriImage: Uri?): LiveData<Boolean> {
         return postRemote.createPost(user,text, uriImage)
     }
 
-    fun getPost(): LiveData<ArrayList<Post>> {
-        return postRemote.getPost()
+    fun getPosts(userId : String): LiveData<ArrayList<Post>> {
+        return postRemote.getPosts(userId)
     }
 
     fun getPostById(postID: String?): LiveData<Post> {

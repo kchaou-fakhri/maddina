@@ -19,6 +19,7 @@ import fakhri.kchaou.maddina.view.auth.LoginActivity
 import fakhri.kchaou.maddina.view.friend.ListFriendFragment
 import fakhri.kchaou.maddina.view.post.CreatePostActivity
 import fakhri.kchaou.maddina.view.profile.UserProfilFragment
+import fakhri.kchaou.maddina.view.search.SearchFragment
 import fakhri.kchaou.maddina.viewmodel.UserVM
 
 
@@ -28,6 +29,7 @@ class HomeActivity : AppCompatActivity() {
     lateinit var homeFragment : HomeFragment
     lateinit var userProfilFragment : UserProfilFragment
     lateinit var listFriendFragment: ListFriendFragment
+    lateinit var searchFragment: SearchFragment
     lateinit var bottomNavigation : MeowBottomNavigation
     lateinit var createPostBtn : FloatingActionButton
     var fragmenSelected : Int = 1
@@ -73,7 +75,7 @@ class HomeActivity : AppCompatActivity() {
         bottomNavigation.add(MeowBottomNavigation.Model(1, R.drawable.ic_home))
         bottomNavigation.add(MeowBottomNavigation.Model(2, R.drawable.ic_user))
         bottomNavigation.add(MeowBottomNavigation.Model(3, R.drawable.send))
-        bottomNavigation.add(MeowBottomNavigation.Model(4, R.drawable.ic_contact))
+        bottomNavigation.add(MeowBottomNavigation.Model(4, R.drawable.contact))
         bottomNavigation.add(MeowBottomNavigation.Model(5, R.drawable.ic_search))
 
         bottomNavigation.show(fragmenSelected)
@@ -82,6 +84,7 @@ class HomeActivity : AppCompatActivity() {
         homeFragment = HomeFragment()
         userProfilFragment = UserProfilFragment()
         listFriendFragment = ListFriendFragment()
+        searchFragment = SearchFragment()
 
 
 
@@ -135,6 +138,10 @@ class HomeActivity : AppCompatActivity() {
             }
 
                 5-> {
+                    supportFragmentManager.beginTransaction().apply {
+                        replace(R.id.home_fragment, searchFragment)
+                        commit()
+                    }
             }
 
             }

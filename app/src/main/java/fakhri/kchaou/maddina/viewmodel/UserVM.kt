@@ -44,16 +44,16 @@ class UserVM() : ViewModel() {
         return userRepository.updateUser(user)
     }
 
-    fun addFriend(user: User, id: String) : LiveData<Message>{
-        return userRepository.addFriend(user, id)
+    fun addFriend(user: User, friend: User) : LiveData<Message>{
+        return userRepository.addFriend(user, friend)
     }
 
     fun getfriends(id: String): LiveData<ArrayList<User>> {
         return userRepository.getFriends(id)
     }
 
-    fun acceptedFriend(user: User, id: String): LiveData<Message> {
-        return userRepository.acceptedFriend(user, id)
+    fun acceptedFriend(user: User, friend: User): LiveData<Message> {
+        return userRepository.acceptedFriend(user, friend)
     }
 
 

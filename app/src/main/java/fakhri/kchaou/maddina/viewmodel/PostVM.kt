@@ -16,8 +16,8 @@ class PostVM : ViewModel() {
         return postRepository.createPost( user, text, uriImage)
     }
 
-    fun getPost() : LiveData<ArrayList<Post>>{
-       return postRepository.getPost()
+    fun getPosts(userId : String) : LiveData<ArrayList<Post>>{
+       return postRepository.getPosts(userId)
     }
 
     fun getPostById(postID: String?) : LiveData<Post> {

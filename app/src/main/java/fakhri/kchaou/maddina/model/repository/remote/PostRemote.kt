@@ -6,9 +6,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import fakhri.kchaou.maddina.model.entity.Post
@@ -27,7 +25,7 @@ class PostRemote {
     @RequiresApi(Build.VERSION_CODES.O)
     fun createPost(user : User, text: String, uriImage: Uri?) : LiveData<Boolean> {
         val mutableLiveData = MutableLiveData<Boolean>()
-
+        val userRemote = UserRemote()
 
         try {
             val current = LocalDateTime.now()
@@ -35,11 +33,17 @@ class PostRemote {
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
             val formatted = current.format(formatter)
             val post = Post( user, text,"", formatted.toString())
+
+
+
             if( uriImage == null){
 
-                db.collection("posts").document()
-                    .set(post)
+        val result=   db.collection("posts").document()
+                val id = result.id
+                        result.set(post)
 
+                user.posts?.add(id)
+                userRemote.addPostIDtoUser(user)
                 mutableLiveData.value = true
             }
             else {
@@ -61,8 +65,12 @@ class PostRemote {
                         var downloadUri = task.result
                         post.media_url = downloadUri.toString()
 
-                        db.collection("posts").document().set(post)
+                     var result = db.collection("posts").document()
+                        val id = result.id
+                         result.set(post)
 
+                        user.posts?.add(id)
+                        userRemote.addPostIDtoUser(user)
                         mutableLiveData.value = true
 
                     }
@@ -91,7 +99,7 @@ class PostRemote {
             var post : Post
 
                 for (document in documents) {
-                    post = document.toObject(Post::class.java)!!
+                    post = document.toObject(Post::class.java)
 
                     post.id = document.id
                     posts.add(post)
@@ -130,4 +138,45 @@ class PostRemote {
 
         return mutableLiveData
     }
+
+    fun getPosts(userId: String) : LiveData<ArrayList<Post>> {
+        val mutableLiveData = MutableLiveData<ArrayList<Post>>()
+        var posts = ArrayList<Post>()
+
+
+        db.collection("users").document(userId).get().addOnSuccessListener {
+            var idUsers = ArrayList<String>()
+            it.toObject(User::class.java)?.relations?.forEach {
+                if (it.state.equals("friend")){
+                    idUsers.add(it.id!!)
+                }
+            }
+          idUsers.add(userId)
+
+                db.collection("posts")
+                    .whereIn("user.id", idUsers)
+                    .get()
+                    .addOnSuccessListener { documents ->
+                        //  Log.i("firebase", "Got value ${it.value}")
+                        var post: Post
+
+                        for (document in documents) {
+                            post = document.toObject(Post::class.java)
+
+                            post.id = document.id
+                            posts.add(post)
+                        }
+
+                        mutableLiveData.value = posts
+                    }
+                    .addOnFailureListener {
+                        mutableLiveData.value = null
+                        Log.e("firebase", "Error getting data", it)
+                    }
+            }
+
+        return mutableLiveData
+    }
+
+
 }

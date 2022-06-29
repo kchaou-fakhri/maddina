@@ -41,8 +41,8 @@ class ProfilFriendActivity : AppCompatActivity() {
                     binding.addFriend.setIconResource(R.drawable.ic_access_time)
                     binding.addFriend.text  ="تم ارسال الدعوة"
                     user.relations?.add(Friend(friendId, "-follower"))
-
-                    userVM.addFriend(user, friend.id!!).observe(this, Observer {
+                    friend.relations?.add(Friend(user.id, "+follower"))
+                    userVM.addFriend(user, friend).observe(this, Observer {
                         Log.println(Log.ASSERT, "-----------",checkRelation(user, friendId!!) )
                     })
 
@@ -54,7 +54,10 @@ class ProfilFriendActivity : AppCompatActivity() {
                     user.relations?.remove(Friend(friendId, "+follower"))
                     user.relations?.add(Friend(friendId, "friend"))
 
-                    userVM.acceptedFriend(user, friend.id!!).observe(this, Observer {
+                    friend.relations?.remove(Friend(user.id, "-follower"))
+                    friend.relations?.add(Friend(user.id, "friend"))
+
+                    userVM.acceptedFriend(user, friend).observe(this, Observer {
                         Log.println(Log.ASSERT, "-----------",checkRelation(user, friendId!!) )
                     })
                     Log.println(Log.ASSERT, "-----------",checkRelation(user, friendId!!) )
@@ -95,7 +98,7 @@ class ProfilFriendActivity : AppCompatActivity() {
                 }
             }
 
-            //Log.println(Log.ASSERT,"firebase--------------------------------------", "Got value ${it.relations}")
+            Log.println(Log.ASSERT,"firebase--------------------------------------", "Got value ${it.relations}")
 
         })
 

@@ -1,6 +1,8 @@
 package fakhri.kchaou.maddina.view.home
 
 import android.app.AlertDialog
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -48,7 +50,10 @@ class HomeFragment : Fragment() {
 
         alertDialog = builder.show()
 
-        postvm.getPost().observe(viewLifecycleOwner, Observer {
+        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("user", Context.MODE_PRIVATE)
+        val id = sharedPreferences.getString("userId", "")!!
+
+        postvm.getPosts(id).observe(viewLifecycleOwner, Observer {
 //           posts.addAll(it)
             if (it == null){
                 val alertNoConnection = AlertNoConnection(requireActivity())

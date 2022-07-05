@@ -72,7 +72,7 @@ class HomeActivity : AppCompatActivity() {
 
         }
 
-        bottomNavigation.add(MeowBottomNavigation.Model(1, R.drawable.ic_home))
+        bottomNavigation.add(MeowBottomNavigation.Model(1, R.drawable.ic_round_home))
         bottomNavigation.add(MeowBottomNavigation.Model(2, R.drawable.ic_user))
         bottomNavigation.add(MeowBottomNavigation.Model(3, R.drawable.send))
         bottomNavigation.add(MeowBottomNavigation.Model(4, R.drawable.contact))

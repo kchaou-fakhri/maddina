@@ -19,11 +19,6 @@ class  UserRemote  (){
 
     private lateinit var auth: FirebaseAuth
 
-    init {
-
-    }
-
-
 
 
 
@@ -209,11 +204,6 @@ class  UserRemote  (){
 
 
 
-
-
-
-
-
     fun getFrineds(id: String): LiveData<ArrayList<User>> {
 
 
@@ -254,6 +244,28 @@ class  UserRemote  (){
         return mutableLiveData
     }
 
+    fun getUsers(): LiveData<ArrayList<User>> {
+
+
+        var mutableLiveData = MutableLiveData<ArrayList<User>>()
+        val db = Firebase.firestore
+
+        db.collection("users").get().addOnSuccessListener {
+
+                        var relations = ArrayList<User>()
+
+                        for (item in it.documents) {
+
+                            relations.add(item.toObject(User::class.java)!!)
+                        }
+                        mutableLiveData.value = relations
+
+            }
+
+
+        return mutableLiveData
+    }
+
     fun acceptedFriend(user: User, friend: User): LiveData<Message> {
 
         var mutableLiveData = MutableLiveData<Message>()
@@ -274,11 +286,39 @@ class  UserRemote  (){
         return mutableLiveData
     }
 
+
+
     fun addPostIDtoUser(user: User){
         val db = Firebase.firestore
         db.collection("users").document(user.id!!)
             .update(mapOf( "posts" to user.posts))
     }
+
+
+
+    fun searchByName(query: String): LiveData<ArrayList<User>>  {
+        var mutableLiveData = MutableLiveData<ArrayList<User>> ()
+        val db = Firebase.firestore
+        db.collection("users").orderBy("name").startAt(query).endAt(query + "\uf8ff")
+            .get()
+            .addOnSuccessListener {
+
+                var relations = ArrayList<User>()
+
+
+
+                for (item in it.documents) {
+
+                    relations.add(item.toObject(User::class.java)!!)
+                }
+                mutableLiveData.value = relations
+
+            }
+        return mutableLiveData
+    }
+
+
+
 
     private  fun getAccepted(id: String, user: User): MutableList<Friend>? {
 
@@ -292,6 +332,7 @@ class  UserRemote  (){
 
         return user.relations
     }
+
     private fun getSender(id : String, user: User): MutableList<Friend>? {
 
         var i=0
@@ -305,8 +346,6 @@ class  UserRemote  (){
         return user.relations
 
     }
-
-
 
 
 

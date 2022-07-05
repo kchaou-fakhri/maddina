@@ -83,15 +83,15 @@ class HomeFragment : Fragment() {
                 }
             }
 
-            val adapterStory = StoriesAdapter(requireContext(), posts)
-            binding.stories.layoutManager = LinearLayoutManager(requireContext())
-            binding.stories.layoutManager = LinearLayoutManager(
-                requireContext(),
-                LinearLayoutManager.HORIZONTAL,
-                true
-            )
-
-            binding.stories.adapter = adapterStory
+//            val adapterStory = StoriesAdapter(requireContext(), posts)
+//            binding.stories.layoutManager = LinearLayoutManager(requireContext())
+//            binding.stories.layoutManager = LinearLayoutManager(
+//                requireContext(),
+//                LinearLayoutManager.HORIZONTAL,
+//                true
+//            )
+//
+//            binding.stories.adapter = adapterStory
 
             alertDialog.dismiss()
             }

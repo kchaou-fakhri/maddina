@@ -6,14 +6,49 @@
     android:layout_height="match_parent"
     tools:context=".view.friend.ListFriendFragment">
 
+    <TextView
+        android:id="@+id/btn_request"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+
+
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+
+        android:fontFamily="@font/cairo_light"
+
+        android:text="دعوات"
+        android:textColor="@color/primary_color"
+
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/btn_all"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+
+
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+
+        android:fontFamily="@font/cairo_light"
+        android:text="أشخاص أخرين"
+
+        android:textColor="@color/primary_color"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/btn_request"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_friend"
-        android:background="@color/gray_200"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/gray_200"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_request" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

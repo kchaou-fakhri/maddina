@@ -19,17 +19,16 @@
         android:layout_height="wrap_content">
 
 
-
-
         <ImageView
+            android:id="@+id/imageView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_menu"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintBottom_toBottomOf="@+id/app_name"
             app:layout_constraintEnd_toStartOf="@+id/app_name"
             app:layout_constraintHorizontal_bias="0.067"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/app_name"
             app:layout_constraintVertical_bias="0.432" />
 
         <TextView
@@ -47,54 +46,44 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-
-            android:id="@+id/linearLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-
-            android:background="#BEC0CC"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/stories"
-            app:layout_constraintTop_toBottomOf="@+id/app_name" />
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/stories"
-            android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.022"
-            app:layout_constraintStart_toStartOf="@+id/app_name"
-            app:layout_constraintTop_toBottomOf="@+id/app_name" />
 
-
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/stories"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="160dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="1.0"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/app_name"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/app_name" />-->
 
         <LinearLayout
-            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginTop="10dp"
-            android:background="#BEC0CC"
-            android:orientation="horizontal"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/gray_200"
+            app:layout_constraintBottom_toTopOf="@+id/rv_post_list"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/stories" />
-
-
+            app:layout_constraintTop_toBottomOf="@+id/imageView3"></LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_post_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
 
 
-            android:background="@color/gray"
+            android:layout_marginTop="16dp"
 
+            android:background="@color/gray_200"
             android:nestedScrollingEnabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/stories"
+            app:layout_constraintTop_toBottomOf="@+id/app_name"
             tools:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             tools:spanCount="3" />
 

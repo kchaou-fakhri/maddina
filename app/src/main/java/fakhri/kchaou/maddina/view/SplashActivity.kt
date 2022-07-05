@@ -4,6 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.view.WindowManager
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import fakhri.kchaou.maddina.R
 import fakhri.kchaou.maddina.view.auth.LoginActivity
 import fakhri.kchaou.maddina.view.home.HomeActivity
@@ -13,6 +17,7 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+
 
         val userVM = UserVM()
 
@@ -37,4 +42,6 @@ class SplashActivity : AppCompatActivity() {
         }, 2000)
 
     }
+
+
 }

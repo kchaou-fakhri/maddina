@@ -56,5 +56,13 @@ class UserVM() : ViewModel() {
         return userRepository.acceptedFriend(user, friend)
     }
 
+    fun searchByName(query: String) : LiveData<ArrayList<User>> {
+        return userRepository.searchByName(query)
+    }
+
+    fun getUsers(): LiveData<ArrayList<User>>{
+        return userRepository.getUsers()
+    }
+
 
 }

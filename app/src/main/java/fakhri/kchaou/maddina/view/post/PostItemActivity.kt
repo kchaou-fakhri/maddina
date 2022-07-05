@@ -13,7 +13,6 @@ import fakhri.kchaou.maddina.R
 import fakhri.kchaou.maddina.databinding.ActivityPostItemBinding
 import fakhri.kchaou.maddina.model.entity.Comment
 import fakhri.kchaou.maddina.model.entity.Post
-import fakhri.kchaou.maddina.model.entity.User
 import fakhri.kchaou.maddina.utils.AlertNoConnection
 import fakhri.kchaou.maddina.utils.LoadingAlert
 import fakhri.kchaou.maddina.utils.convert
@@ -54,7 +53,7 @@ class PostItemActivity : AppCompatActivity() {
                 binding.createdAt.text = convert(it.created_at!!)
                 Glide.with(this /* context */)
                     .load(it.media_url)
-                    .into(findViewById<ImageView>(R.id.post_img))
+                    .into(findViewById<ImageView>(R.id.card_post_img))
                 loadingAlert.dismissDialog()
             }
 

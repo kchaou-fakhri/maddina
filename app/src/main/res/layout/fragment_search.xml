@@ -8,7 +8,7 @@
     tools:context=".view.search.SearchFragment">
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="40dp"
 
@@ -40,7 +40,7 @@
         android:background="@color/gray_200"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintTop_toBottomOf="@+id/search" />
 
 
 

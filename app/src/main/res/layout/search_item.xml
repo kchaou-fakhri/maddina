@@ -35,47 +35,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_accepted"
-        android:layout_width="130dp"
-        android:layout_height="35dp"
-        android:layout_margin="10dp"
-
-        android:background="@drawable/shape_bkg"
-        android:backgroundTint="@color/primary_color"
-        android:fontFamily="@font/cairo_light"
-        android:text="تواصل"
-        android:textColor="@color/yellow_color"
-        android:textSize="18sp"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/username"
-        app:layout_constraintHorizontal_bias="0.861"
-        app:layout_constraintStart_toStartOf="@+id/username"
-        app:layout_constraintTop_toBottomOf="@+id/username"
-        app:layout_constraintVertical_bias="0.304" />
-
-    <Button
-        android:id="@+id/cancel"
+    <TextView
+        android:id="@+id/job"
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
-
-        android:layout_marginStart="10dp"
-
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/shape_bkg"
-        android:backgroundTint="@color/white"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/cairo_light"
-        android:text="@string/cancel"
-        android:textColor="@color/primary_color"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_accepted"
-        app:layout_constraintEnd_toStartOf="@+id/btn_accepted"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:text=""
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/username"
+        app:layout_constraintHorizontal_bias="0.947"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btn_accepted"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/username" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:src="@drawable/ic_options"
+        app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+        app:layout_constraintEnd_toStartOf="@+id/profile_image"
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/profile_image"
+        app:layout_constraintVertical_bias="0.314" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

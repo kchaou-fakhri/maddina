@@ -38,6 +38,32 @@ class ListFriendFragment : Fragment() {
 
         })
 
+        binding.btnRequest.setOnClickListener {
+            userVM.getfriends(id).observe(viewLifecycleOwner, Observer {
+
+                val adapter = ListFriendAdapter(requireContext(), it)
+                binding.listFriend.layoutManager = LinearLayoutManager(requireContext())
+                binding.listFriend.adapter = adapter
+                adapter.notifyDataSetChanged()
+                Log.println(Log.ASSERT, "-----------", "request -----------" + it)
+
+
+            })
+        }
+        binding.btnAll.setOnClickListener {
+            userVM.getUsers().observe(viewLifecycleOwner, Observer {
+
+                val adapter = ListFriendAdapter(requireContext(), it)
+                binding.listFriend.layoutManager = LinearLayoutManager(requireContext())
+
+                binding.listFriend.adapter = adapter
+                adapter.notifyDataSetChanged()
+                Log.println(Log.ASSERT, "-----------", "all -----------" + it)
+
+
+            })
+        }
+
 
         return binding.root
     }

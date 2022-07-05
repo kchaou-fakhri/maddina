@@ -55,21 +55,18 @@
         android:id="@+id/cancel"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="16dp"
         android:background="@drawable/shape_bkg"
         android:backgroundTint="@color/yellow_color"
         android:fontFamily="@font/arefruqaa"
         android:text="خروج"
-        android:textColor="@color/primary_color"
 
+        android:textColor="@color/primary_color"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/btn_create"
-        app:layout_constraintEnd_toStartOf="@+id/btn_create"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/btn_create"
         app:layout_constraintVertical_bias="0.0" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

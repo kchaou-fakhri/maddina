@@ -48,5 +48,13 @@ class UserRepository() {
         return userRemote.acceptedFriend(user, friend)
     }
 
+    fun searchByName(query: String): LiveData<ArrayList<User>>  {
+        return userRemote.searchByName(query)
+    }
+
+    fun getUsers(): LiveData<ArrayList<User>> {
+        return userRemote.getUsers()
+    }
+
 
 }

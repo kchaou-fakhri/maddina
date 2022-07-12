@@ -20,4 +20,9 @@ class LoadingAlert internal constructor(private val activity: Activity) {
         alertDialog.cancel()
 
     }
+
+    fun showDialog() {
+        alertDialog.show()
+
+    }
 }

@@ -1,21 +1,21 @@
-package fakhri.kchaou.maddina.model.repository
+package fakhri.kchaou.maddina.model.data.repository
 
 
 import androidx.lifecycle.LiveData
 import fakhri.kchaou.maddina.model.entity.User
-import fakhri.kchaou.maddina.model.repository.remote.UserRemote
-import fakhri.kchaou.maddina.utils.Message
+import fakhri.kchaou.maddina.model.data.remote.UserRemote
+import fakhri.kchaou.maddina.utils.MessageResult
 
 class UserRepository() {
 
     var userRemote: UserRemote = UserRemote()
 
 
-    fun add(user: User) :LiveData<Message> {
+    fun add(user: User) :LiveData<MessageResult> {
         return userRemote.add(user)
     }
 
-    fun login(email: String, password: String) :LiveData<Message>{
+    fun login(email: String, password: String) :LiveData<MessageResult>{
        return  userRemote.login(email, password)
     }
 
@@ -31,11 +31,11 @@ class UserRepository() {
         return userRemote.getUserById(id)
     }
 
-    fun updateUser(user: User): LiveData<Message> {
+    fun updateUser(user: User): LiveData<MessageResult> {
         return userRemote.updateUser(user)
     }
 
-    fun addFriend(user: User, friend: User): LiveData<Message> {
+    fun addFriend(user: User, friend: User): LiveData<MessageResult> {
         return userRemote.addFriend(user, friend)
     }
 
@@ -44,7 +44,7 @@ class UserRepository() {
         return userRemote.getFrineds(id)
     }
 
-    fun acceptedFriend(user: User, friend: User): LiveData<Message> {
+    fun acceptedFriend(user: User, friend: User): LiveData<MessageResult> {
         return userRemote.acceptedFriend(user, friend)
     }
 

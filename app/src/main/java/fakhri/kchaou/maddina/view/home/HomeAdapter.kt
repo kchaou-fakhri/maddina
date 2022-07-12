@@ -20,11 +20,13 @@ import fakhri.kchaou.maddina.view.profile.ProfilFriendActivity
 class HomeAdapter(val context: Context, val posts: ArrayList<Post>):
     RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
-    inner class ViewHolder (itemView : View) : RecyclerView.ViewHolder(itemView){
+   inner class ViewHolder (itemView : View) : RecyclerView.ViewHolder(itemView){
 
 
 
         fun bindView(data : Post){
+
+
             val sharedPreferences: SharedPreferences = context.getSharedPreferences("user", Context.MODE_PRIVATE)
             val id = sharedPreferences.getString("userId", "")!!
 

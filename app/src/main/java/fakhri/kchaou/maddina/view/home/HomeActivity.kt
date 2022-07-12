@@ -16,6 +16,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import fakhri.kchaou.maddina.R
 import fakhri.kchaou.maddina.databinding.FragmentListFriendBinding
 import fakhri.kchaou.maddina.view.auth.LoginActivity
+import fakhri.kchaou.maddina.view.chat.ChatFragment
 import fakhri.kchaou.maddina.view.friend.ListFriendFragment
 import fakhri.kchaou.maddina.view.post.CreatePostActivity
 import fakhri.kchaou.maddina.view.profile.UserProfilFragment
@@ -30,6 +31,7 @@ class HomeActivity : AppCompatActivity() {
     lateinit var userProfilFragment : UserProfilFragment
     lateinit var listFriendFragment: ListFriendFragment
     lateinit var searchFragment: SearchFragment
+    lateinit var chatFragment: ChatFragment
     lateinit var bottomNavigation : MeowBottomNavigation
     lateinit var createPostBtn : FloatingActionButton
     var fragmenSelected : Int = 1
@@ -81,10 +83,11 @@ class HomeActivity : AppCompatActivity() {
         bottomNavigation.show(fragmenSelected)
 
 
-        homeFragment = HomeFragment()
+        homeFragment       = HomeFragment()
         userProfilFragment = UserProfilFragment()
         listFriendFragment = ListFriendFragment()
-        searchFragment = SearchFragment()
+        searchFragment     = SearchFragment()
+        chatFragment       = ChatFragment()
 
 
 
@@ -93,6 +96,7 @@ class HomeActivity : AppCompatActivity() {
 
         }
         }
+
 
 
 
@@ -121,13 +125,11 @@ class HomeActivity : AppCompatActivity() {
 
 
                 3 -> {
-                    val userVM = UserVM()
-                    userVM.logout()
-                    val preferences = getSharedPreferences("user", 0)
-                    preferences.edit().remove("userId").commit()
-                    val intent = Intent (this, LoginActivity::class.java)
-                    startActivity(intent)
-                    this.finish()
+                    supportFragmentManager.beginTransaction().apply {
+                        replace(R.id.home_fragment, chatFragment)
+                        commit()
+                    }
+
                 }
 
                 4 -> {
@@ -146,6 +148,14 @@ class HomeActivity : AppCompatActivity() {
 
             }
         }
+
+//    val userVM = UserVM()
+//    userVM.logout()
+//    val preferences = getSharedPreferences("user", 0)
+//    preferences.edit().remove("userId").commit()
+//    val intent = Intent (this, LoginActivity::class.java)
+//    startActivity(intent)
+//    this.finish()
 
 }
 

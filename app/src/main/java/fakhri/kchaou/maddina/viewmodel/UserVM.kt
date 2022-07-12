@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import fakhri.kchaou.maddina.model.entity.Friend
 import fakhri.kchaou.maddina.model.entity.User
-import fakhri.kchaou.maddina.model.repository.UserRepository
-import fakhri.kchaou.maddina.utils.Message
+import fakhri.kchaou.maddina.model.data.repository.UserRepository
+import fakhri.kchaou.maddina.utils.MessageResult
 
 class UserVM() : ViewModel() {
 
@@ -17,12 +17,12 @@ class UserVM() : ViewModel() {
     }
 
 
-    fun addUser(name : String,email :String, password :String , sex: String) : LiveData<Message>{
+    fun addUser(name : String,email :String, password :String , sex: String) : LiveData<MessageResult>{
         val user = User(null,name,email, password, sex, "", "","",ArrayList<Friend>())
         return userRepository.add(user)
     }
 
-    fun login(email :String, password :String ) : LiveData<Message>{
+    fun login(email :String, password :String ) : LiveData<MessageResult>{
 
       return  userRepository.login(email, password)
     }
@@ -40,11 +40,11 @@ class UserVM() : ViewModel() {
         return userRepository.getUserById(id)
     }
 
-    fun updateUser(user: User) : LiveData<Message>{
+    fun updateUser(user: User) : LiveData<MessageResult>{
         return userRepository.updateUser(user)
     }
 
-    fun addFriend(user: User, friend: User) : LiveData<Message>{
+    fun addFriend(user: User, friend: User) : LiveData<MessageResult>{
         return userRepository.addFriend(user, friend)
     }
 
@@ -52,7 +52,7 @@ class UserVM() : ViewModel() {
         return userRepository.getFriends(id)
     }
 
-    fun acceptedFriend(user: User, friend: User): LiveData<Message> {
+    fun acceptedFriend(user: User, friend: User): LiveData<MessageResult> {
         return userRepository.acceptedFriend(user, friend)
     }
 

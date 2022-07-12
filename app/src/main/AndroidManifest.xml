@@ -10,10 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.maddina">
-
         <activity
-            android:name=".ListRequestFriendActivity"
+            android:name=".view.chat.ChatActivity"
             android:exported="false" />
+
         <activity
             android:name=".view.profile.ProfilFriendActivity"
             android:exported="false" />
@@ -30,7 +30,7 @@
             android:name=".view.post.CreatePostActivity"
             android:exported="false" />
         <activity
-            android:name=".view.SplashActivity"
+            android:name=".view.home.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,16 +1,11 @@
-package fakhri.kchaou.maddina.view
+package fakhri.kchaou.maddina.view.home
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.view.WindowManager
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
+import androidx.appcompat.app.AppCompatActivity
 import fakhri.kchaou.maddina.R
 import fakhri.kchaou.maddina.view.auth.LoginActivity
-import fakhri.kchaou.maddina.view.home.HomeActivity
 import fakhri.kchaou.maddina.viewmodel.UserVM
 
 class SplashActivity : AppCompatActivity() {

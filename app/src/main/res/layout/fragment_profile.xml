@@ -35,7 +35,7 @@
                 android:layout_height="match_parent"
                 android:background="?attr/colorPrimary"
                 android:backgroundTint="@color/white"
-                android:minHeight="?attr/actionBarSize"
+                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme"
 
                 app:layout_constraintBottom_toBottomOf="parent"

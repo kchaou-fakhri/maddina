@@ -1,19 +1,11 @@
-package fakhri.kchaou.maddina.model.repository
+package fakhri.kchaou.maddina.model.data.repository
 
 
 import android.net.Uri
-import android.os.Build
-import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
 import fakhri.kchaou.maddina.model.entity.Post
 import fakhri.kchaou.maddina.model.entity.User
-import fakhri.kchaou.maddina.model.repository.remote.PostRemote
-import java.util.*
+import fakhri.kchaou.maddina.model.data.remote.PostRemote
 import kotlin.collections.ArrayList
 
 

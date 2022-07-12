@@ -1,4 +1,4 @@
-package fakhri.kchaou.maddina.model.repository.remote
+package fakhri.kchaou.maddina.model.data.remote
 
 import android.content.ContentValues.TAG
 import android.util.Log
@@ -7,12 +7,10 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import fakhri.kchaou.maddina.model.entity.Friend
 import fakhri.kchaou.maddina.model.entity.User
-import fakhri.kchaou.maddina.utils.Message
-import java.util.*
+import fakhri.kchaou.maddina.utils.MessageResult
 import kotlin.collections.ArrayList
 
 class  UserRemote  (){
@@ -52,10 +50,10 @@ class  UserRemote  (){
     }
 
 
-    fun add(user: User)  : LiveData<Message>{
+    fun add(user: User)  : LiveData<MessageResult>{
 
-        var mutableLiveData = MutableLiveData<Message>()
-        var message :Message
+        var mutableLiveData = MutableLiveData<MessageResult>()
+        var message :MessageResult
 
         try {
 
@@ -70,7 +68,7 @@ class  UserRemote  (){
                         insertTORealTimeDataBase(user)
                         /**********End Insert User to realTime database **********/
 
-                        message = Message(true, user.id.toString())
+                        message = MessageResult(true, user.id.toString())
                         mutableLiveData.value = message
 
 
@@ -78,12 +76,12 @@ class  UserRemote  (){
                         val  msg = task.exception.toString()
 
                         if(msg.length.equals(116)){
-                            message = Message(false, "الحساب موجود بالفعل ")
+                            message = MessageResult(false, "الحساب موجود بالفعل ")
                             mutableLiveData.value = message
                         }
                         else
                         {
-                            message = Message(false, "حدث خطأ ما, حاول لاحقا")
+                            message = MessageResult(false, "حدث خطأ ما, حاول لاحقا")
                             mutableLiveData.value = message
                         }
 
@@ -93,7 +91,7 @@ class  UserRemote  (){
                 }
         }
         catch (e:Exception){
-            message = Message(false, e.message.toString())
+            message = MessageResult(false, e.message.toString())
             mutableLiveData.value = message
         }
 
@@ -103,10 +101,10 @@ class  UserRemote  (){
 
 
 
-    fun login(email: String, password: String) : LiveData<Message>{
+    fun login(email: String, password: String) : LiveData<MessageResult>{
 
-        var mutableLiveData = MutableLiveData<Message>()
-        var message :Message
+        var mutableLiveData = MutableLiveData<MessageResult>()
+        var message :MessageResult
 
 
 
@@ -115,14 +113,14 @@ class  UserRemote  (){
             auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
                 if(task.isSuccessful){
                     /********** GET id of current user ***********************/
-                    message = Message(true, task.result.user?.uid.toString())
+                    message = MessageResult(true, task.result.user?.uid.toString())
                     mutableLiveData.value = message
                     /********** End GET id of current user *******************/
 
 
                 }
             }.addOnFailureListener { exception ->
-                message = Message(false, "المعلومات التي أدخلتها غير صحيحة")
+                message = MessageResult(false, "المعلومات التي أدخلتها غير صحيحة")
                 mutableLiveData.value = message
 
 
@@ -130,7 +128,7 @@ class  UserRemote  (){
 
         }catch(e :Exception){
 
-            message = Message(false, "حدث خطأ ما, حاول لاحقا")
+            message = MessageResult(false, "حدث خطأ ما, حاول لاحقا")
             mutableLiveData.value = message
 
         }
@@ -166,25 +164,25 @@ class  UserRemote  (){
 
 
 
-    fun updateUser(user: User): LiveData<Message> {
+    fun updateUser(user: User): LiveData<MessageResult> {
 
-        var mutableLiveData = MutableLiveData<Message>()
+        var mutableLiveData = MutableLiveData<MessageResult>()
         val db = Firebase.firestore
         db.collection("users").document(user.id!!)
             .set(user)
             .addOnSuccessListener {
-              mutableLiveData.value = Message(true, "")
+              mutableLiveData.value = MessageResult(true, "")
             }
             .addOnFailureListener {
-                mutableLiveData.value = Message(false, "")
+                mutableLiveData.value = MessageResult(false, "")
             }
         return mutableLiveData
     }
 
 
 
-    fun addFriend(user: User, friend: User): LiveData<Message> {
-        var mutableLiveData = MutableLiveData<Message>()
+    fun addFriend(user: User, friend: User): LiveData<MessageResult> {
+        var mutableLiveData = MutableLiveData<MessageResult>()
         val db = Firebase.firestore
         db.collection("users").document(user.id!!).update(mapOf(
             "relations" to user.relations,
@@ -194,10 +192,10 @@ class  UserRemote  (){
             "relations" to friend.relations,
         ))
             .addOnSuccessListener {
-                mutableLiveData.value = Message(true, "yemchi")
+                mutableLiveData.value = MessageResult(true, "yemchi")
             }
             .addOnFailureListener {
-                mutableLiveData.value = Message(false, "laaaaaaaaaaaa")
+                mutableLiveData.value = MessageResult(false, "laaaaaaaaaaaa")
             }
         return mutableLiveData
     }
@@ -217,7 +215,7 @@ class  UserRemote  (){
 
 
             it.toObject(User::class.java)?.relations?.forEach {
-                if (it.state.equals("+follower")){
+                if (it.state.equals("friend")){
                     idUsers.add(it.id!!)
                 }
             }
@@ -233,6 +231,7 @@ class  UserRemote  (){
 
 
                     for (item in it.documents) {
+
 
                         relations.add(item.toObject(User::class.java)!!)
                     }
@@ -266,9 +265,9 @@ class  UserRemote  (){
         return mutableLiveData
     }
 
-    fun acceptedFriend(user: User, friend: User): LiveData<Message> {
+    fun acceptedFriend(user: User, friend: User): LiveData<MessageResult> {
 
-        var mutableLiveData = MutableLiveData<Message>()
+        var mutableLiveData = MutableLiveData<MessageResult>()
         val db = Firebase.firestore
         db.collection("users").document(user.id!!)
             .update(mapOf( "relations" to user.relations))
@@ -278,10 +277,10 @@ class  UserRemote  (){
             "relations" to friend.relations,
         ))
             .addOnSuccessListener {
-                mutableLiveData.value = Message(true, "yemchi")
+                mutableLiveData.value = MessageResult(true, "yemchi")
             }
             .addOnFailureListener {
-                mutableLiveData.value = Message(false, "laaaaaaaaaaaa")
+                mutableLiveData.value = MessageResult(false, "laaaaaaaaaaaa")
             }
         return mutableLiveData
     }

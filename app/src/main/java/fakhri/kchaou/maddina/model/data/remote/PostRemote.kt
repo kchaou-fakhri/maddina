@@ -1,4 +1,4 @@
-package fakhri.kchaou.maddina.model.repository.remote
+package fakhri.kchaou.maddina.model.data.remote
 
 import android.net.Uri
 import android.os.Build

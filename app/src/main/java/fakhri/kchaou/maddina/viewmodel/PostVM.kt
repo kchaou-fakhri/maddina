@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import fakhri.kchaou.maddina.model.entity.Post
 import fakhri.kchaou.maddina.model.entity.User
-import fakhri.kchaou.maddina.model.repository.PostRepository
+import fakhri.kchaou.maddina.model.data.repository.PostRepository
 
 class PostVM : ViewModel() {
 

@@ -26,6 +26,8 @@ class ChatActivity : AppCompatActivity() {
     lateinit var loadingAlert : LoadingAlert
     lateinit var chatID : String
     lateinit var adapter : MessageAdapter
+    lateinit var userId :String
+    var ifFirstTime = true
 
     var array = arrayListOf<Message>()
 
@@ -51,7 +53,7 @@ class ChatActivity : AppCompatActivity() {
         val friendName = intent.extras!!.getString("friendName")
 
         val sharedPreferences: SharedPreferences? = this.getSharedPreferences("user", Context.MODE_PRIVATE)
-        val userId :String = sharedPreferences?.getString("userId", "").toString()
+            userId = sharedPreferences?.getString("userId", "").toString()
 
         /**************************************************************************************************************************************
         *****************                     Check if chat exist                       *******************************************************
@@ -63,20 +65,28 @@ class ChatActivity : AppCompatActivity() {
 
 
 
+        adapter = MessageAdapter(this,  array)
+        binding.messages.layoutManager = LinearLayoutManager(this)
+
+        binding.messages.adapter = adapter
+
+
+
 
         /**************************************************************************************************************************************
          *****************                     send Message                             *******************************************************
          ***************************************************************************************************************************************/
         binding.send.setOnClickListener {
-            Log.println(Log.ASSERT, "-------------", chatID)
 
-            chatVM.sendMessage(Message(null,binding.message.text.toString(), Date(), userId, friendId, chatID)).observe(this, Observer {
-                array.add(it)
-                adapter.notifyDataSetChanged()
-                binding.messages.scrollToPosition(array.size - 1)
+        if (binding.message.text.isNotEmpty()){
 
 
-            })
+                    chatVM.sendMessage(Message(null,binding.message.text.toString(), Date(), userId, friendId, chatID)).observe(this, Observer {
+
+                        binding.message.text.clear()
+                    })
+
+        }
 
         }
 
@@ -105,6 +115,8 @@ class ChatActivity : AppCompatActivity() {
                 ifExist = true
                 getAndDispalyData()
 
+
+
             }
             else{
                 binding.firstConnect.visibility = View.VISIBLE
@@ -127,23 +139,44 @@ class ChatActivity : AppCompatActivity() {
             binding.chatsLayout.visibility  = View.VISIBLE
             chatID = it.message
             loadingAlert.dismissDialog()
+            chatID = it.message
 
         })
     }
 
     private fun getAndDispalyData(){
         chatVM.getMessages(chatID).observe(this, Observer {
-            array.addAll(it)
-            Log.println(Log.ASSERT,"------------------------------------", it.toString())
-
-            adapter = MessageAdapter(this,  array)
-            binding.messages.layoutManager = LinearLayoutManager(this)
-            binding.messages.scrollToPosition(array.size - 1)
 
 
-            binding.messages.adapter = adapter
+                it.forEach {
+                    if(!array.contains(it)){
+                        array.add(it)
+                    }
+                }
+
+
+
+                adapter.notifyDataSetChanged()
+
+
+
+
+        })
+
+
+    }
+
+    private fun updateData(){
+        chatVM.getOnDataChanged(chatID).observe(this, Observer {
+            array.add(it)
+                        adapter.notifyDataSetChanged()
+
+            Log.println(Log.ASSERT, "-----hhhh------",it.toString() )
+
 
 
         })
     }
+
+
 }

@@ -8,14 +8,17 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import fakhri.kchaou.maddina.model.entity.Friend
 import fakhri.kchaou.maddina.model.entity.User
 import fakhri.kchaou.maddina.utils.MessageResult
+import java.util.*
 import kotlin.collections.ArrayList
 
 class  UserRemote  (){
 
     private lateinit var auth: FirebaseAuth
+    private val storage_referance = FirebaseStorage.getInstance().getReference()
 
 
 
@@ -168,16 +171,53 @@ class  UserRemote  (){
 
         var mutableLiveData = MutableLiveData<MessageResult>()
         val db = Firebase.firestore
-        db.collection("users").document(user.id!!)
-            .set(user)
-            .addOnSuccessListener {
-              mutableLiveData.value = MessageResult(true, "")
+
+        if (user.userImage == null) {
+            db.collection("users").document(user.id!!)
+                .set(user)
+                .addOnSuccessListener {
+                    mutableLiveData.value = MessageResult(true, "")
+                }
+                .addOnFailureListener {
+                    mutableLiveData.value = MessageResult(false, "")
+                }
+        }
+        else {
+            val ref =
+                storage_referance.child("users/${user.id + Date().toString().replace(" ", "")}")
+
+            var uploadTask = ref.putFile(user.userImage!!)
+
+            uploadTask.continueWithTask { task ->
+                if (!task.isSuccessful) {
+                    task.exception?.let {
+                        throw it
+
+                    }
+                }
+                ref.downloadUrl
+            }.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    var downloadUri = task.result
+                    user.userImage = downloadUri
+
+                    var result = db.collection("users").document()
+                    val id = result.id
+                    result.set(user)
+                    mutableLiveData.value = MessageResult(true, downloadUri.toString())
+
+
+                } else {
+                    mutableLiveData.value = MessageResult(false, "")
+
+                }
+
             }
-            .addOnFailureListener {
-                mutableLiveData.value = MessageResult(false, "")
-            }
-        return mutableLiveData
-    }
+        }
+
+
+            return mutableLiveData
+        }
 
 
 

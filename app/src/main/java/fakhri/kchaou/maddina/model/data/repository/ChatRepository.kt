@@ -30,4 +30,12 @@ class ChatRepository {
     fun getMessages(chatID: String): LiveData<ArrayList<Message>> {
         return chatRemote.getMessages(chatID)
     }
+
+    fun getChats(id: String): LiveData<ArrayList<Chat>> {
+        return chatRemote.getChats(id)
+    }
+
+    fun getOnDataChanged(id: String): LiveData<Message> {
+        return chatRemote.getOnDataChanged(id)
+    }
 }

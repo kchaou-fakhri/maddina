@@ -1,5 +1,7 @@
 package fakhri.kchaou.maddina.model.data.remote
 
+import android.content.ContentValues.TAG
+import android.nfc.Tag
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -92,19 +94,23 @@ class ChatRemote {
         var mutableLiveData = MutableLiveData<ArrayList<Message>>()
 
         var messages = arrayListOf<Message>()
-        db_message.whereEqualTo("chatID", chatID).get().addOnSuccessListener {
+        db_message.orderBy("time").whereEqualTo("chatID", chatID).addSnapshotListener { value, e ->
+        messages.clear()
 
-            it.documents.forEach {
-                var _mesg = it.toObject(Message::class.java)!!
-                        _mesg.id = it.id
-               messages.add(_mesg)
+            value?.documents?.forEach {
+                if (!messages.contains(it.toObject(Message::class.java))) {
 
+
+                    var _mesg = it.toObject(Message::class.java)!!
+                    _mesg.id = it.id
+                    messages.add(_mesg)
+                }
 
             }
             mutableLiveData.value = messages
-
-
         }
+
+
         return mutableLiveData
     }
 
@@ -112,7 +118,7 @@ class ChatRemote {
         var mutableLiveData =MutableLiveData<ArrayList<Chat>>()
 
 
-var array = arrayListOf<Chat>()
+    var array = arrayListOf<Chat>()
         db_chat.whereArrayContains("usersID",userID).get().addOnSuccessListener {
 
             it.documents.forEach{
@@ -136,6 +142,28 @@ var array = arrayListOf<Chat>()
 
         return mutableLiveData
     }
+
+
+
+    fun getOnDataChanged(chatID : String): LiveData<Message> {
+
+        var mutableLiveData = MutableLiveData<Message>()
+
+        var messages = arrayListOf<Message>()
+        db_message.whereEqualTo("chatID", chatID).get().addOnSuccessListener {
+            it?.documentChanges?.forEach {
+                mutableLiveData.value = it.document.toObject(Message::class.java)
+            }
+
+            }
+        Log.println(Log.ASSERT, TAG,mutableLiveData.value.toString() )
+
+
+
+
+        return mutableLiveData
+    }
+
 
 
 

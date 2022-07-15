@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import fakhri.kchaou.maddina.model.entity.Friend
 import fakhri.kchaou.maddina.model.entity.User
 import fakhri.kchaou.maddina.model.data.repository.UserRepository
+import fakhri.kchaou.maddina.model.entity.Chat
 import fakhri.kchaou.maddina.utils.MessageResult
 
 class UserVM() : ViewModel() {
@@ -63,6 +64,7 @@ class UserVM() : ViewModel() {
     fun getUsers(): LiveData<ArrayList<User>>{
         return userRepository.getUsers()
     }
+
 
 
 }

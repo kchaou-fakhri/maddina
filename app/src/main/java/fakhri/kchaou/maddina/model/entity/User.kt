@@ -1,5 +1,6 @@
 package fakhri.kchaou.maddina.model.entity
 
+import android.net.Uri
 import java.lang.reflect.Constructor
 
 
@@ -8,7 +9,9 @@ data class User (var id: String? = "",var name: String? = "",
                  var sex:String? = "",  var job :String? = "",
                  var adress : String? = "" ,var bio : String? = "",
                  var relations : ArrayList<Friend>? = arrayListOf(),
-                 var posts : ArrayList<String>? = arrayListOf()
+                 var posts : ArrayList<String>? = arrayListOf(),
+                 var userImage : Uri? = null
+
                 )
 {
 

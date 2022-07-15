@@ -31,4 +31,14 @@ class ChatVM : ViewModel() {
     fun getMessages(chatID: String): LiveData<ArrayList<Message>> {
         return chatRepository.getMessages(chatID)
     }
+
+    fun getChats(id: String): LiveData<ArrayList<Chat>>  {
+        return chatRepository.getChats(id)
+    }
+
+    fun getOnDataChanged(id: String): LiveData<Message> {
+        return chatRepository.getOnDataChanged(id)
+    }
+
+
 }

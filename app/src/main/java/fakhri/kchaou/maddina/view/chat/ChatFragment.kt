@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import fakhri.kchaou.maddina.R
 import fakhri.kchaou.maddina.databinding.FragmentChatBinding
 import fakhri.kchaou.maddina.model.entity.User
+import fakhri.kchaou.maddina.view.home.HomeAdapter
+import fakhri.kchaou.maddina.viewmodel.ChatVM
 import fakhri.kchaou.maddina.viewmodel.UserVM
 
 
@@ -21,6 +23,7 @@ class ChatFragment : Fragment() {
     private var _binding : FragmentChatBinding? =null
     private val binding get() = _binding!!
     lateinit var userVM : UserVM
+    lateinit var chatVM: ChatVM
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +32,7 @@ class ChatFragment : Fragment() {
 
         _binding = FragmentChatBinding.inflate(inflater, container, false)
         userVM = UserVM()
-
+        chatVM = ChatVM()
         val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("user", Context.MODE_PRIVATE)
         val id = sharedPreferences.getString("userId", "")!!
 
@@ -45,6 +48,16 @@ class ChatFragment : Fragment() {
             )
 
             binding.users.adapter = adapterStory
+        })
+
+
+       chatVM.getChats(id).observe(viewLifecycleOwner, Observer {
+        if (it != null){
+            val adapter = ChatAdapter(requireContext(),it )
+            binding.chats.layoutManager = LinearLayoutManager(requireContext())
+            binding.chats.adapter = adapter
+        }
+
         })
 
 

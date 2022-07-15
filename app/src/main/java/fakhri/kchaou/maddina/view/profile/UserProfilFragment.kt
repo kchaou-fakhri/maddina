@@ -9,15 +9,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.marginBottom
 import androidx.core.view.marginLeft
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import fakhri.kchaou.maddina.R
 import fakhri.kchaou.maddina.databinding.FragmentProfileBinding
 import fakhri.kchaou.maddina.model.entity.Post
+import fakhri.kchaou.maddina.model.entity.User
 import fakhri.kchaou.maddina.view.home.HomeActivity
 import fakhri.kchaou.maddina.view.home.HomeFragment
 import fakhri.kchaou.maddina.view.profile.edit.EditProfilActivity
@@ -29,6 +34,7 @@ class UserProfilFragment : Fragment() {
     private var _binding  : FragmentProfileBinding? = null
     private val binding get() =_binding!!
     var posts : ArrayList<Post> = ArrayList()
+    private var user = User()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,13 +90,38 @@ class UserProfilFragment : Fragment() {
 
             })
 
-
+        /********** edit users info *****************/
         binding.editProfil.setOnClickListener {
             activity?.let{
                 val intent = Intent (it, EditProfilActivity::class.java)
                 it.startActivity(intent)
             }
         }
+
+        /********** edit user image *****************/
+        binding.editUserImage.setOnClickListener {
+            user.id = id
+            val intent = Intent()
+            intent.action = Intent.ACTION_GET_CONTENT
+            intent.type = "image/*"
+            this.startActivityForResult(intent,2)
+            userVM.updateUser(user).observe(requireActivity(), Observer {
+                Glide.with(requireContext() /* context */)
+                    .load(it)
+                    .into(binding.profileImage)
+
+            })
+        }
+
+        val  callbacks = object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+
+                requireActivity().finish()
+            }
+
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(callbacks)
+
 
 
 
@@ -108,7 +139,13 @@ class UserProfilFragment : Fragment() {
 
 
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == 2 && resultCode == AppCompatActivity.RESULT_OK && data != null){
+            user.userImage = data.data
 
+        }
+    }
 
 
     fun returnToHome(){

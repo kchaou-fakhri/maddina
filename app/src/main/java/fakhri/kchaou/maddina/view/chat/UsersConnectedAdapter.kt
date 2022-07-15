@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import fakhri.kchaou.maddina.R
 import fakhri.kchaou.maddina.model.entity.User
@@ -17,7 +18,7 @@ class UsersConnectedAdapter(val context: Context, var users : ArrayList<User>)
 
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item : User){
-
+            itemView.findViewById<TextView>(R.id.username).text = item.name
             itemView.findViewById<ImageView>(R.id.user_image).setOnClickListener {
                 context?.let{
                     val intent = Intent (it, ChatActivity::class.java )

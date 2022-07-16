@@ -10,7 +10,7 @@ data class User (var id: String? = "",var name: String? = "",
                  var adress : String? = "" ,var bio : String? = "",
                  var relations : ArrayList<Friend>? = arrayListOf(),
                  var posts : ArrayList<String>? = arrayListOf(),
-                 var userImage : Uri? = null
+                 var userImage : String? = null
 
                 )
 {

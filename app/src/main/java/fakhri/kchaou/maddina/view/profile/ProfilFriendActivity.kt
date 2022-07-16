@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import fakhri.kchaou.maddina.R
 import fakhri.kchaou.maddina.databinding.ActivityProfilFriendBinding
 import fakhri.kchaou.maddina.model.entity.Friend
@@ -105,6 +107,16 @@ class ProfilFriendActivity : AppCompatActivity() {
         userVM.getUserById(friendId!!).observe(this, Observer {
             friend = it
             binding.username.text = it.name
+
+            if (!it.userImage.isNullOrEmpty()){
+                Glide.with(this /* context */)
+                    .load(it.userImage)
+                    .into(binding.profileImage)
+            }else{
+                Glide.with(this /* context */)
+                    .load(R.drawable.img_if_no_user_image)
+                    .into(binding.profileImage)
+            }
             if (it.bio != ""){
                 binding.bio.text = "( ${it.bio} )"
                 val param = binding.bio.layoutParams as ViewGroup.MarginLayoutParams

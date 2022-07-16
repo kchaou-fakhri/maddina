@@ -4,21 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_marginBottom="2dp"
+
     android:id="@+id/main"
     android:paddingBottom="2dp"
     android:background="@color/white"
-    android:layout_height="wrap_content">
+    android:layout_height="70dp"
+    >
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/user_image"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/img_security"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/img_default_profil_img"
         app:civ_border_color="#C3C2C0"
 
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.917"
+        app:layout_constraintHorizontal_bias="0.914"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

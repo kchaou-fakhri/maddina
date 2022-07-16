@@ -1,5 +1,6 @@
 package fakhri.kchaou.maddina.viewmodel
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import fakhri.kchaou.maddina.model.entity.Friend
@@ -65,6 +66,9 @@ class UserVM() : ViewModel() {
         return userRepository.getUsers()
     }
 
+    fun updateUserImage(id: String, imageURI: Uri?): LiveData<MessageResult> {
+        return userRepository.updateUserImage(id, imageURI)
+    }
 
 
 }

@@ -94,7 +94,7 @@ class ChatRemote {
         var mutableLiveData = MutableLiveData<ArrayList<Message>>()
 
         var messages = arrayListOf<Message>()
-        db_message.orderBy("time").whereEqualTo("chatID", chatID).addSnapshotListener { value, e ->
+        db_message.whereEqualTo("chatID", chatID).addSnapshotListener { value, e ->
         messages.clear()
 
             value?.documents?.forEach {

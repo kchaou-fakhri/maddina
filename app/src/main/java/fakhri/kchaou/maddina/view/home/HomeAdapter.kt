@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import fakhri.kchaou.maddina.R
@@ -15,6 +17,7 @@ import fakhri.kchaou.maddina.model.entity.Post
 import fakhri.kchaou.maddina.utils.convert
 import fakhri.kchaou.maddina.view.post.PostItemActivity
 import fakhri.kchaou.maddina.view.profile.ProfilFriendActivity
+import fakhri.kchaou.maddina.viewmodel.UserVM
 
 
 class HomeAdapter(val context: Context, val posts: ArrayList<Post>):
@@ -22,13 +25,28 @@ class HomeAdapter(val context: Context, val posts: ArrayList<Post>):
 
    inner class ViewHolder (itemView : View) : RecyclerView.ViewHolder(itemView){
 
-
+       private val lifecycleOwner by lazy{
+           context as? LifecycleOwner
+       }
 
         fun bindView(data : Post){
 
 
             val sharedPreferences: SharedPreferences = context.getSharedPreferences("user", Context.MODE_PRIVATE)
             val id = sharedPreferences.getString("userId", "")!!
+
+            val userVM = UserVM()
+            userVM.getUserById(data.user?.id!!).observe(lifecycleOwner!!, Observer {
+                if (!it.userImage.isNullOrEmpty()){
+                    Glide.with(context /* context */)
+                        .load(it.userImage)
+                        .into(itemView.findViewById<ImageView>(R.id.profile_image))
+                }else{
+                    Glide.with(context /* context */)
+                        .load(R.drawable.img_if_no_user_image)
+                         .into(itemView.findViewById<ImageView>(R.id.profile_image))
+                }
+            })
 
             itemView.findViewById<TextView>(R.id.created_at).text = convert(data.created_at!!)
             itemView.findViewById<TextView>(R.id.post_text).text = data.text

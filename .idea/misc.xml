@@ -14,9 +14,13 @@
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/drawable/bkg_image_strok.xml" value="0.2265" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/drawable/bkg_img.xml" value="0.2265" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/drawable/greenprogress.xml" value="0.1925" />
+        <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/drawable/ic_access_time.xml" value="0.243" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/drawable/ic_add.xml" value="0.171" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/drawable/ic_alt.xml" value="0.171" />
+        <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/drawable/ic_arrow_back.xml" value="0.243" />
+        <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/drawable/ic_bookmark.xml" value="0.243" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/drawable/ic_camera.xml" value="0.171" />
+        <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/drawable/ic_check_circle.xml" value="0.243" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/drawable/ic_circle.xml" value="0.253" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/drawable/ic_comment.xml" value="0.1935" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/drawable/ic_create.xml" value="0.2835" />
@@ -24,6 +28,7 @@
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/drawable/ic_favorite1.xml" value="0.1935" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/drawable/ic_forward.xml" value="0.1935" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/drawable/ic_home.xml" value="0.1935" />
+        <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/drawable/ic_language.xml" value="0.243" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1935" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/drawable/ic_menu.xml" value="0.171" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/drawable/ic_music.xml" value="0.1935" />
@@ -62,7 +67,7 @@
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/layout/fragment_home.xml" value="0.2" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/layout/fragment_list_friend.xml" value="0.3484375" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/layout/fragment_login.xml" value="0.25" />
-        <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/layout/fragment_profile.xml" value="0.4" />
+        <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/layout/fragment_profile.xml" value="0.2786458333333333" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/layout/fragment_search.xml" value="0.3625" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/layout/fragment_sign.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/asus/StudioProjects/maddina/app/src/main/res/layout/friend_request_item.xml" value="0.3625" />

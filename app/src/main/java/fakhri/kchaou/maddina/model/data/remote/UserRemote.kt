@@ -1,6 +1,7 @@
 package fakhri.kchaou.maddina.model.data.remote
 
 import android.content.ContentValues.TAG
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -172,7 +173,8 @@ class  UserRemote  (){
         var mutableLiveData = MutableLiveData<MessageResult>()
         val db = Firebase.firestore
 
-        if (user.userImage == null) {
+
+
             db.collection("users").document(user.id!!)
                 .set(user)
                 .addOnSuccessListener {
@@ -181,39 +183,8 @@ class  UserRemote  (){
                 .addOnFailureListener {
                     mutableLiveData.value = MessageResult(false, "")
                 }
-        }
-        else {
-            val ref =
-                storage_referance.child("users/${user.id + Date().toString().replace(" ", "")}")
-
-            var uploadTask = ref.putFile(user.userImage!!)
-
-            uploadTask.continueWithTask { task ->
-                if (!task.isSuccessful) {
-                    task.exception?.let {
-                        throw it
-
-                    }
-                }
-                ref.downloadUrl
-            }.addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    var downloadUri = task.result
-                    user.userImage = downloadUri
-
-                    var result = db.collection("users").document()
-                    val id = result.id
-                    result.set(user)
-                    mutableLiveData.value = MessageResult(true, downloadUri.toString())
 
 
-                } else {
-                    mutableLiveData.value = MessageResult(false, "")
-
-                }
-
-            }
-        }
 
 
             return mutableLiveData
@@ -386,7 +357,41 @@ class  UserRemote  (){
 
     }
 
+    fun updateUserImage(id: String, imageURI: Uri?): LiveData<MessageResult> {
+        val db = Firebase.firestore
+        var mutableLiveData = MutableLiveData<MessageResult>()
+        val ref =
+            storage_referance.child("users/${id + Date().toString().replace(" ", "")}")
 
+        var uploadTask = ref.putFile(imageURI!!)
+
+        uploadTask.continueWithTask { task ->
+            if (!task.isSuccessful) {
+                task.exception?.let {
+                    throw it
+
+                }
+            }
+            ref.downloadUrl
+        }.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                var downloadUri = task.result
+                var image = downloadUri.toString()
+                var result = db.collection("users").document(id)
+                result.update("userImage", image)
+                mutableLiveData.value = MessageResult(true, image)
+
+
+            } else {
+                mutableLiveData.value = MessageResult(false, "")
+
+            }
+
+        }
+
+
+        return mutableLiveData
+    }
 
 
 }

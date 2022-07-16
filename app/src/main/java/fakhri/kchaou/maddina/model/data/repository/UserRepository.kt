@@ -1,6 +1,7 @@
 package fakhri.kchaou.maddina.model.data.repository
 
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import fakhri.kchaou.maddina.model.entity.User
 import fakhri.kchaou.maddina.model.data.remote.UserRemote
@@ -54,6 +55,11 @@ class UserRepository() {
 
     fun getUsers(): LiveData<ArrayList<User>> {
         return userRemote.getUsers()
+    }
+
+    fun updateUserImage(id: String, imageURI: Uri?): LiveData<MessageResult> {
+        return userRemote.updateUserImage(id, imageURI)
+
     }
 
 

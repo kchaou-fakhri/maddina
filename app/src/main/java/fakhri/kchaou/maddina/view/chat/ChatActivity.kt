@@ -58,7 +58,7 @@ class ChatActivity : AppCompatActivity() {
         /**************************************************************************************************************************************
         *****************                     Check if chat exist                       *******************************************************
         ***************************************************************************************************************************************/
-        ifChatExist(Chat(null, arrayListOf(friendId!!,userId)))
+        chatID = ifChatExist(Chat(null, arrayListOf(friendId!!,userId)))
 
 
 
@@ -67,11 +67,10 @@ class ChatActivity : AppCompatActivity() {
 
         adapter = MessageAdapter(this,  array)
         binding.messages.layoutManager = LinearLayoutManager(this)
-
         binding.messages.adapter = adapter
 
 
-
+        getAndDispalyData(chatID)
 
         /**************************************************************************************************************************************
          *****************                     send Message                             *******************************************************
@@ -103,33 +102,24 @@ class ChatActivity : AppCompatActivity() {
     }
 
 
-    private fun ifChatExist(chat : Chat) : Boolean{
+    private fun ifChatExist(chat : Chat) : String {
 
-        var ifExist = false
+       var id: String = ""
         chatVM.ifInConnect(chat).observe(this, Observer {
             if (it.statu == true){
                 binding.firstConnect.visibility = View.INVISIBLE
                 binding.chatsLayout.visibility  = View.VISIBLE
-                chatID = it.message
-                Log.println(Log.ASSERT, TAG, it.message)
-                ifExist = true
-                getAndDispalyData()
-
-
-
+                id=  it.message
             }
             else{
                 binding.firstConnect.visibility = View.VISIBLE
                 binding.chatsLayout.visibility  = View.INVISIBLE
 
-
             }
-
-
             loadingAlert.dismissDialog()
 
         })
-        return ifExist
+        return id
     }
 
     private fun createNewChat(chat: Chat){
@@ -144,8 +134,8 @@ class ChatActivity : AppCompatActivity() {
         })
     }
 
-    private fun getAndDispalyData(){
-        chatVM.getMessages(chatID).observe(this, Observer {
+    private fun getAndDispalyData(id: String) {
+        chatVM.getMessages(id).observe(this, Observer {
 
 
                 it.forEach {

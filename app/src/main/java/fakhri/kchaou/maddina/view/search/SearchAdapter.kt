@@ -6,10 +6,12 @@ import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import fakhri.kchaou.maddina.R
 import fakhri.kchaou.maddina.model.entity.Friend
@@ -30,7 +32,15 @@ class SearchAdapter(val context: Context, val friends: ArrayList<User>) : Recycl
             itemView.findViewById<TextView>(R.id.username).text = data.name
             itemView.findViewById<TextView>(R.id.job).text = data.job
 
-
+            if (!data.userImage.isNullOrEmpty()){
+                Glide.with(context /* context */)
+                    .load(data.userImage)
+                    .into(itemView.findViewById<ImageView>(R.id.profile_image))
+            }else{
+                Glide.with(context /* context */)
+                    .load(R.drawable.img_if_no_user_image)
+                    .into(itemView.findViewById<ImageView>(R.id.profile_image))
+            }
                 val sharedPreferences: SharedPreferences = context.getSharedPreferences("user", Context.MODE_PRIVATE)
                 val id = sharedPreferences.getString("userId", "")!!
 

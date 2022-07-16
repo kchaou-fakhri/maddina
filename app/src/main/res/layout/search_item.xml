@@ -14,7 +14,7 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/user"
+        android:src="@drawable/img_default_profil_img"
         app:civ_border_color="#C3C2C0"
         app:civ_border_width="1dp"
         app:layout_constraintEnd_toEndOf="parent"

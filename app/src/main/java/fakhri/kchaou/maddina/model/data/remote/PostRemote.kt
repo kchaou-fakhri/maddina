@@ -1,5 +1,6 @@
 package fakhri.kchaou.maddina.model.data.remote
 
+import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Build
 import android.util.Log
@@ -22,6 +23,7 @@ class PostRemote {
     private val storage_referance = FirebaseStorage.getInstance().getReference()
 
 
+    @SuppressLint("SuspiciousIndentation")
     @RequiresApi(Build.VERSION_CODES.O)
     fun createPost(user : User, text: String, uriImage: Uri?) : LiveData<Boolean> {
         val mutableLiveData = MutableLiveData<Boolean>()

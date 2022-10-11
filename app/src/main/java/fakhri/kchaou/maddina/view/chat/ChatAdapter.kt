@@ -1,5 +1,6 @@
 package fakhri.kchaou.maddina.view.chat
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -30,8 +31,10 @@ class ChatAdapter(val context: Context, var chats : ArrayList<Chat>)
 
 
 
+        @SuppressLint("SuspiciousIndentation")
         fun bind(item : Chat){
         var friendID = ""
+            var friendName = ""
             val userVM = UserVM()
 
 
@@ -46,9 +49,11 @@ class ChatAdapter(val context: Context, var chats : ArrayList<Chat>)
             Log.println(Log.ASSERT, "///////////-------", friendID)
 
             userVM.getUserById(friendID).observe(lifecycleOwner!!, Observer {
-                Log.println(Log.ASSERT, "+++++++------", it.toString())
+
 
                 itemView.findViewById<TextView>(R.id.username).text = it.name
+                friendName = it.name.toString()
+
                 if (!it.userImage.isNullOrEmpty()){
                     Glide.with(context /* context */)
                         .load(it.userImage)
@@ -65,7 +70,7 @@ class ChatAdapter(val context: Context, var chats : ArrayList<Chat>)
                     val intent = Intent (it, ChatActivity::class.java )
 
                         intent.putExtra("friendId", friendID);
-                        intent.putExtra("friendName", " ");
+                        intent.putExtra("friendName", friendName);
 
 
 

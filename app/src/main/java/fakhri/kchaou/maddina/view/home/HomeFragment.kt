@@ -66,7 +66,7 @@ class HomeFragment : Fragment() {
 
             else{
                var array = it
-                array.shuffle()
+               // array.shuffle()
             val adapter = HomeAdapter(requireContext(),array )
             binding.rvPostList.layoutManager = LinearLayoutManager(requireContext())
             binding.rvPostList.adapter = adapter
